@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  my-first-serverless-app
+
+  Sample SAM Template for my-first-serverless-app
+  
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 10
+
+Resources:
+  CommentsBucket:
+    Type: AWS::S3::Bucket
+  
+  ExpressBanckend:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: dist/lambda/
+      Handler: server.lambdaHandler
+      Runtime: nodejs12.x
+      Environment:
+        Variables:
+          BUCKET: !Ref CommentsBucket
+      Policies:
+        - S3CrudPolicy:
+            BucketName: !Ref CommentsBucket
+      Events:
+        RootEndPoint:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /
+            Method: any
+        EverythingElse:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /{proxy+}
+            Method: any

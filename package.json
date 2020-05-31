@@ -1,0 +1,39 @@
+{
+  "name": "hello_world",
+  "version": "1.0.0",
+  "description": "hello world sample for NodeJS",
+  "main": "app.js",
+  "repository": "https://github.com/awslabs/aws-sam-cli/tree/develop/samcli/local/init/templates/cookiecutter-aws-sam-hello-nodejs",
+  "author": "SAM CLI",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.686.0",
+    "axios": "^0.18.0",
+    "body-parser": "^1.19.0",
+    "env-var": "^6.1.1",
+    "express": "^4.17.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "serverless-http": "^2.5.0",
+    "uuid": "^8.1.0"
+  },
+  "scripts": {
+    "test": "mocha tests/unit/",
+    "dev": "npm run dev:s3 && sam build && sam local start-api ",
+    "dev:s3": "aws s3 cp dist/assets s3://serverlessreactapptest/assets/ --recursive --acl public-read",
+    "build": "npm run build:server && npm run build:client",
+    "build:server": "webpack --config webpack.server.config.js --mode production",
+    "build:client": "webpack --config webpack.client.config.js --mode production"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.1",
+    "@babel/preset-env": "^7.10.1",
+    "@babel/preset-react": "^7.10.1",
+    "babel-loader": "^8.1.0",
+    "chai": "^4.2.0",
+    "create-file-webpack": "^1.0.2",
+    "mocha": "^6.1.4",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}
