@@ -1,4 +1,4 @@
-module.exports =  (markup, bundle) => {
+export default (markup, bundle) => {
   return `<!doctype html>
     <html>
       <head>

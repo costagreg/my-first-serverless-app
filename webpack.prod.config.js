@@ -29,7 +29,7 @@ const server = {
   name: "server",
   mode: "production",
   target: "node",
-  entry: [path.resolve(__dirname, "./src/app.js")],
+  entry: [path.resolve(__dirname, "./src/server/serverless.js")],
   output: {
     path: path.resolve(__dirname, "dist/lambda"),
     filename: "server.js",

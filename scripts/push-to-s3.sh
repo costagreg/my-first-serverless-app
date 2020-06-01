@@ -1,7 +1,4 @@
 #!/bin/sh
-# if [ "$NODE_ENV" != "production" ]; then
-#   export $(egrep -v '^#' .env | xargs)
-# fi
 
 export $(egrep -v '^#' .env | xargs)
 

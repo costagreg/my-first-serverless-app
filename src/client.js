@@ -1,9 +1,9 @@
-const React = require("react");
-const { hydrate } = require("react-dom");
-const Dashboard = require("./Dashboard");
+import React from "react"
+import { hydrate } from "react-dom"
+import App from "./App"
 
 const render = () => {
-  hydrate(<Dashboard />, document.getElementById("root"));
+  hydrate(<App />, document.getElementById("root"));
 };
 
 render();

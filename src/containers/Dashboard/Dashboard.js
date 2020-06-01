@@ -1,6 +1,6 @@
-const React = require('react')
+import React, { Component } from 'react'
 
-class Dashboard extends React.Component {
+class Dashboard extends Component {
   constructor(props) {
     super(props)
     
@@ -22,4 +22,4 @@ class Dashboard extends React.Component {
   } 
 }
 
-module.exports = Dashboard
+export default Dashboard

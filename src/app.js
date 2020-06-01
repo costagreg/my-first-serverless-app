@@ -1,16 +1,6 @@
-const serverless = require('serverless-http')
-const express = require('express')
-const ssr = require('./ssr')
-const app = new express()
+import React from 'react'
+import Dashboard from './containers/Dashboard'
 
-app.get('/', (req, res) => {
-    const html = ssr()
-    res.send(html)
-})
-
-app.post('/', (req, res) => {
-    res.send('Hello World')
-})
-
-
-module.exports.lambdaHandler = serverless(app)
+export default function App() {
+  return <Dashboard />
+}

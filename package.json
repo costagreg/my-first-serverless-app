@@ -19,12 +19,13 @@
   },
   "scripts": {
     "test": "mocha tests/unit/",
-    "dev": "npm run dev:build && npm run dev:s3 && sam build && sam local start-api",
-    "dev:build": "webpack --config webpack.dev.config.js --mode development",
-    "dev:s3": "cross-env NODE_ENV=development ./scripts/push-to-s3.sh",
-    "prod": "npm run prod:build && npm run prod:s3 && sam build && sam deploy",
-    "prod:build": "webpack --config webpack.prod.config.js --mode production",
-    "prod:s3": "cross-env NODE_ENV=production ./scripts/push-to-s3.sh"
+    "dev": "",
+    "lambda:dev": "npm run lambda:dev:build && npm run lambda:dev:s3 && sam build && sam local start-api",
+    "lambda:dev:build": "webpack --config webpack.dev.config.js --mode development",
+    "lambda:dev:s3": "cross-env NODE_ENV=development ./scripts/push-to-s3.sh",
+    "lambda:prod": "npm run lambda:prod:build && npm run lambda:prod:s3 && sam build && sam deploy",
+    "lambda:prod:build": "webpack --config webpack.prod.config.js --mode production",
+    "lambda:prod:s3": "cross-env NODE_ENV=production ./scripts/push-to-s3.sh"
   },
   "devDependencies": {
     "@babel/core": "^7.10.1",
