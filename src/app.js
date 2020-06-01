@@ -3,12 +3,6 @@ const express = require('express')
 const ssr = require('./ssr')
 const app = new express()
 
-app.get('/assets/', (req, res) => {
-    const html = ssr()
-    res.send(html)
-})
-
-
 app.get('/', (req, res) => {
     const html = ssr()
     res.send(html)
