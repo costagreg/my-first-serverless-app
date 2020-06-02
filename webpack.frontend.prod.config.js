@@ -5,9 +5,9 @@ const Dotenv = require("dotenv-webpack");
 
 const client = {
   name: "client",
-  mode: "development",
+  mode: "production",
   target: "web",
-  entry: [path.resolve(__dirname, "./src/client.js")],
+  entry: [path.resolve(__dirname, "./src/frontend/client.js")],
   output: {
     path: path.resolve(__dirname, "dist/assets"),
     filename: "client.js",
@@ -27,11 +27,11 @@ const client = {
 
 const server = {
   name: "server",
-  mode: "development",
+  mode: "production",
   target: "node",
-  entry: [path.resolve(__dirname, "./src/server/serverless.js")],
+  entry: [path.resolve(__dirname, "./src/frontend/server/serverless.js")],
   output: {
-    path: path.resolve(__dirname, "dist/lambda"),
+    path: path.resolve(__dirname, "dist/lambda-frontend"),
     filename: "server.js",
     libraryTarget: "commonjs2",
   },
@@ -48,7 +48,7 @@ const server = {
   },
   plugins: [
     new CreateFileWebpack({
-      path: "./dist/lambda",
+      path: "./dist/lambda-frontend",
       fileName: "package.json",
       content: `{"name": "lambda-function", "version": "1.0.0"}`,
     }),

@@ -10,22 +10,44 @@ Globals:
   Function:
     Timeout: 10
 
-Resources:
-  CommentsBucket:
-    Type: AWS::S3::Bucket
+Parameters:
+  TABLENAME:
+    Type: String
+    Description: The DynamoDB table for storing URLs information.
+    Default: 'UrlsTable'
+
+  REGIONNAME:
+    Type: String
+    Description: Default region for deployment.
+    Default: 'us-east-1'
   
-  ExpressBanckend:
+Resources:
+  UrlsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Ref TABLENAME
+      AttributeDefinitions:
+        - AttributeName: Id
+          AttributeType: S
+      KeySchema: 
+        - AttributeName: Id
+          KeyType: HASH
+      ProvisionedThroughput: 
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+
+  
+  FrontEnd:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: dist/lambda/
+      CodeUri: dist/lambda-frontend/
       Handler: server.lambdaHandler
       Runtime: nodejs12.x
       Environment:
         Variables:
-          BUCKET: !Ref CommentsBucket
-      Policies:
-        - S3CrudPolicy:
-            BucketName: !Ref CommentsBucket
+          TABLE: !Ref TABLENAME
+          REGION: !Ref REGIONNAME
+      Policies: AmazonDynamoDBFullAccess
       Events:
         RootEndPoint:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
@@ -36,6 +58,25 @@ Resources:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /{proxy+}
+            Method: any
+  
+  BackendApi:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: dist/lambda-backend/
+      Handler: server.lambdaHandler
+      Runtime: nodejs12.x
+
+      Events:
+        RootEndPoint:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /api
+            Method: any
+        EverythingElse:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /api/{proxy+}
             Method: any
 
 Outputs:

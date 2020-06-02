@@ -7,7 +7,7 @@
   "author": "SAM CLI",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.686.0",
+    "aws-sdk": "^2.688.0",
     "axios": "^0.18.0",
     "body-parser": "^1.19.0",
     "env-var": "^6.1.1",
@@ -20,12 +20,14 @@
   "scripts": {
     "test": "mocha tests/unit/",
     "dev": "",
-    "lambda:dev": "npm run lambda:dev:build && npm run lambda:dev:s3 && sam build && sam local start-api",
-    "lambda:dev:build": "webpack --config webpack.dev.config.js --mode development",
-    "lambda:dev:s3": "cross-env NODE_ENV=development ./scripts/push-to-s3.sh",
-    "lambda:prod": "npm run lambda:prod:build && npm run lambda:prod:s3 && sam build && sam deploy",
-    "lambda:prod:build": "webpack --config webpack.prod.config.js --mode production",
-    "lambda:prod:s3": "cross-env NODE_ENV=production ./scripts/push-to-s3.sh"
+    "lambda:dev": "npm run lambda:dev:frontend:build && npm run lambda:dev:backend:build &&  npm run lambda:dev:frontend:s3 && sam build && sam local start-api",
+    "lambda:dev:backend:build": "webpack --config webpack.backend.dev.config.js --mode development",
+    "lambda:dev:frontend:build": "webpack --config webpack.frontend.dev.config.js --mode development",
+    "lambda:dev:frontend:s3": "cross-env NODE_ENV=development ./scripts/push-to-s3.sh",
+    "lambda:prod": "npm run lambda:prod:frontend:build && npm run lambda:prod:backend:build && npm run lambda:prod:frontend:s3 && sam build && sam deploy",
+    "lambda:prod:backend:build": "webpack --config webpack.backend.dev.config.js --mode production",
+    "lambda:prod:frontend:build": "webpack --config webpack.frontend.prod.config.js --mode production",
+    "lambda:prod:frontend:s3": "cross-env NODE_ENV=production ./scripts/push-to-s3.sh"
   },
   "devDependencies": {
     "@babel/core": "^7.10.1",

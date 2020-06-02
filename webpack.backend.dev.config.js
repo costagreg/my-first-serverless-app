@@ -3,35 +3,13 @@ const path = require("path");
 const CreateFileWebpack = require("create-file-webpack");
 const Dotenv = require("dotenv-webpack");
 
-const client = {
-  name: "client",
-  mode: "production",
-  target: "web",
-  entry: [path.resolve(__dirname, "./src/client.js")],
-  output: {
-    path: path.resolve(__dirname, "dist/assets"),
-    filename: "client.js",
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-        },
-      },
-    ],
-  },
-};
-
 const server = {
   name: "server",
-  mode: "production",
+  mode: "development",
   target: "node",
-  entry: [path.resolve(__dirname, "./src/server/serverless.js")],
+  entry: [path.resolve(__dirname, "./src/backend/server.js")],
   output: {
-    path: path.resolve(__dirname, "dist/lambda"),
+    path: path.resolve(__dirname, "dist/lambda-backend"),
     filename: "server.js",
     libraryTarget: "commonjs2",
   },
@@ -48,7 +26,7 @@ const server = {
   },
   plugins: [
     new CreateFileWebpack({
-      path: "./dist/lambda",
+      path: "./dist/lambda-backend",
       fileName: "package.json",
       content: `{"name": "lambda-function", "version": "1.0.0"}`,
     }),
@@ -56,4 +34,4 @@ const server = {
   ],
 };
 
-module.exports = [client, server];
+module.exports = server;

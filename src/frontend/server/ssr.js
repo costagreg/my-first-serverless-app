@@ -1,4 +1,5 @@
 import React from 'react'
+import AWS from 'aws-sdk'
 import ReactDOMServer from 'react-dom/server'
 import template from './template'
 import App from '../App'
