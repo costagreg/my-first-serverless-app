@@ -12,7 +12,7 @@ class Dashboard extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.setState({
-        text: 'Yeahhhhhhh'
+        text: 'Client side test!'
       })
     }, 2000)
   }

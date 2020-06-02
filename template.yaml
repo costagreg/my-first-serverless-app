@@ -37,3 +37,8 @@ Resources:
           Properties:
             Path: /{proxy+}
             Method: any
+
+Outputs:
+  ProdDataEndpoint:
+    Description: "API Prod stage endpoint"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
