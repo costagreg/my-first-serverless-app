@@ -7,3 +7,10 @@ const render = () => {
 };
 
 render();
+
+if (module.hot) {
+  module.hot.accept('./App.js', () => {
+    const NextApp = require('./App').default;
+    render(NextApp)
+  })
+}

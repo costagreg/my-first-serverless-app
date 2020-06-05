@@ -3,6 +3,32 @@ const path = require("path");
 const CreateFileWebpack = require("create-file-webpack");
 const Dotenv = require("dotenv-webpack");
 
+const sharedRules = [
+  {
+    test: /\.(js|jsx)$/,
+    exclude: /node_modules/,
+    use: {
+      loader: "babel-loader",
+    },
+  },
+  {
+    test: /\.(png|jpe?g|gif|svg)$/,
+    use: [
+      {
+        loader: 'file-loader',
+      },
+    ],
+  },
+  {
+    test: /\.(woff|woff2|ttf|otf|eot)$/,
+    use: [
+      {
+        loader: 'file-loader',
+      },
+    ],
+  },
+]
+
 const client = {
   name: "client",
   mode: "production",
@@ -14,12 +40,10 @@ const client = {
   },
   module: {
     rules: [
+      ...sharedRules,
       {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-        },
+        test: /\.(sa|sc|c)ss$/,
+        use: "null-loader",
       },
     ],
   },
@@ -37,12 +61,20 @@ const server = {
   },
   module: {
     rules: [
+      ...sharedRules,
       {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-        },
+        test: /\.(sa|sc|c)ss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'isomorphic-style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+            },
+            {
+              loader: 'sass-loader',
+            },
+          ],
+        }),
       },
     ],
   },

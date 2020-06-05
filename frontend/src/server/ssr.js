@@ -1,16 +1,16 @@
-import React from 'react'
-import AWS from 'aws-sdk'
-import ReactDOMServer from 'react-dom/server'
-import template from './template'
-import App from '../App'
+import React from "react"
+import AWS from "aws-sdk"
+import ReactDOMServer from "react-dom/server"
+import template from "./template"
+import App from "../App"
 
-export default () => {
-  const myApp = <App />;
+export default () => (_, res) => {
+  const myApp = <App />
 
-  const html = ReactDOMServer.renderToString(myApp);
+  const html = ReactDOMServer.renderToString(myApp)
 
-  return template(
+  return res.send(template(
     html,
-    `https://${process.env.S3_BUILD_URL}.s3.amazonaws.com/${process.env.NODE_ENV}/assets/client.js`
-  );
-};
+    `/client.js`
+  ))
+}

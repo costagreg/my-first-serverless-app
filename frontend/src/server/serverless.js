@@ -5,13 +5,7 @@ import ssr from './ssr'
 const app = new express()
 
 app.get('/', (req, res) => {
-    const html = ssr()
-    res.send(html)
+    return ssr(req, res)
 })
-
-app.post('/', (req, res) => {
-    res.send('Hello World')
-})
-
 
 export const lambdaHandler = serverless(app)
