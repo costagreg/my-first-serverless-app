@@ -40,7 +40,7 @@ Resources:
   FrontEnd:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: dist/lambda-frontend/
+      CodeUri: ./frontend/dist/lambda/
       Handler: server.lambdaHandler
       Runtime: nodejs12.x
       Environment:
@@ -63,7 +63,7 @@ Resources:
   BackendApi:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: dist/lambda-backend/
+      CodeUri: ./backend/dist/lambda/
       Handler: server.lambdaHandler
       Runtime: nodejs12.x
 

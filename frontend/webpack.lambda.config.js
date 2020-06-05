@@ -7,9 +7,9 @@ const client = {
   name: "client",
   mode: "production",
   target: "web",
-  entry: [path.resolve(__dirname, "./src/frontend/client.js")],
+  entry: [path.resolve(__dirname, "./src/client.js")],
   output: {
-    path: path.resolve(__dirname, "dist/assets"),
+    path: path.resolve(__dirname, "./dist/assets"),
     filename: "client.js",
   },
   module: {
@@ -29,9 +29,9 @@ const server = {
   name: "server",
   mode: "production",
   target: "node",
-  entry: [path.resolve(__dirname, "./src/frontend/server/serverless.js")],
+  entry: [path.resolve(__dirname, "./src/server/serverless.js")],
   output: {
-    path: path.resolve(__dirname, "dist/lambda-frontend"),
+    path: path.resolve(__dirname, "./dist/lambda"),
     filename: "server.js",
     libraryTarget: "commonjs2",
   },
@@ -48,11 +48,11 @@ const server = {
   },
   plugins: [
     new CreateFileWebpack({
-      path: "./dist/lambda-frontend",
+      path: "./dist/lambda",
       fileName: "package.json",
       content: `{"name": "lambda-function", "version": "1.0.0"}`,
     }),
-    new Dotenv(),
+    new Dotenv({ path: path.resolve(__dirname, "../.env") }),
   ],
 };
 

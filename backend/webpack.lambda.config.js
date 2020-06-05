@@ -5,11 +5,11 @@ const Dotenv = require("dotenv-webpack");
 
 const server = {
   name: "server",
-  mode: "development",
+  mode: "production",
   target: "node",
-  entry: [path.resolve(__dirname, "./src/backend/server.js")],
+  entry: [path.resolve(__dirname, "./src/server.js")],
   output: {
-    path: path.resolve(__dirname, "dist/lambda-backend"),
+    path: path.resolve(__dirname, "./dist/lambda"),
     filename: "server.js",
     libraryTarget: "commonjs2",
   },
@@ -26,11 +26,11 @@ const server = {
   },
   plugins: [
     new CreateFileWebpack({
-      path: "./dist/lambda-backend",
+      path: "./dist/lambda",
       fileName: "package.json",
       content: `{"name": "lambda-function", "version": "1.0.0"}`,
     }),
-    new Dotenv(),
+    new Dotenv({ path: "../.env" }),
   ],
 };
 

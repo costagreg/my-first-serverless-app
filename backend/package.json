@@ -1,0 +1,24 @@
+{
+  "name": "my-first-serveless-app-api",
+  "version": "1.0.0",
+  "description": "A serverless url shortener to reduce links",
+  "main": "src/server.js",
+  "author": "Gregorio Alessio Costa",
+  "license": "MIT",
+  "dependencies": {},
+  "scripts": {
+    "lambda:dev": "webpack --config webpack.lambda.config.js --mode development"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.1",
+    "@babel/preset-env": "^7.10.1",
+    "@babel/preset-react": "^7.10.1",
+    "babel-loader": "^8.1.0",
+    "create-file-webpack": "^1.0.2",
+    "cross-env": "^7.0.2",
+    "dotenv-webpack": "^1.8.0",
+    "npm-run-all": "^4.1.5",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}
