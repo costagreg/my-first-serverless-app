@@ -3,6 +3,7 @@ const path = require("path");
 const CreateFileWebpack = require("create-file-webpack");
 const Dotenv = require("dotenv-webpack");
 
+
 const sharedRules = [
   {
     test: /\.(js|jsx)$/,
@@ -31,7 +32,6 @@ const sharedRules = [
 
 const client = {
   name: "client",
-  mode: "production",
   target: "web",
   entry: [path.resolve(__dirname, "./src/client.js")],
   output: {
@@ -51,7 +51,6 @@ const client = {
 
 const server = {
   name: "server",
-  mode: "production",
   target: "node",
   entry: [path.resolve(__dirname, "./src/server/serverless.js")],
   output: {
@@ -64,17 +63,20 @@ const server = {
       ...sharedRules,
       {
         test: /\.(sa|sc|c)ss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'isomorphic-style-loader',
-          use: [
-            {
-              loader: 'css-loader',
+        use: [
+          {
+            loader: 'isomorphic-style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
             },
-            {
-              loader: 'sass-loader',
-            },
-          ],
-        }),
+          },
+          {
+            loader: 'sass-loader',
+          },
+        ],
       },
     ],
   },
