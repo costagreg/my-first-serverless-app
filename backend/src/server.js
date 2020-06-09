@@ -1,11 +1,9 @@
-exports.lambdaHandler = async (event) => {
-  // TODO implement
-  const response = {
-      statusCode: 200,
-      body: JSON.stringify('Hello from Books lambda!'),
-      headers: {
-          'Content-Type': 'application/json'    
-      }
-  };
-  return response;
-};
+import serverless from 'serverless-http'
+import express from 'express'
+import indexRoutes from './routes/index.js'
+
+const app = new express()
+
+app.use(indexRoutes)
+
+export const lambdaHandler = serverless(app)
