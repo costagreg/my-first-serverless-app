@@ -4,15 +4,13 @@ import ReactDOMServer from "react-dom/server";
 import template from "./template";
 import App from "../App";
 
+const S3_URL_ASSETS = `https://${process.env.S3_BUILD_URL}.s3.amazonaws.com/${process.env.NODE_ENV}/assets/`;
+
 export default (_, isLambdaFunction) => (_, res) => {
   const myApp = <App />;
-
-  console.log(isLambdaFunction)
-
   const html = ReactDOMServer.renderToString(myApp);
-  const bundleUrl = isLambdaFunction
-    ? `https://${process.env.S3_BUILD_URL}.s3.amazonaws.com/${process.env.NODE_ENV}/assets/client.js`
-    : '/client.js';
+  const bundleUrl = `${isLambdaFunction ? S3_URL_ASSETS :  '/'}client.js`
+  const styleUrl = `${isLambdaFunction ? S3_URL_ASSETS :  '/'}styles.css`
 
-  return res.send(template(html, bundleUrl));
+  return res.send(template(html, bundleUrl, styleUrl));
 };

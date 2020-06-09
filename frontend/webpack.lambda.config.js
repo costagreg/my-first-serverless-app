@@ -1,5 +1,5 @@
 const path = require("path");
-
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CreateFileWebpack = require("create-file-webpack");
 const Dotenv = require("dotenv-webpack");
 
@@ -54,8 +54,8 @@ const server = {
   target: "node",
   entry: [path.resolve(__dirname, "./src/server/serverless.js")],
   output: {
-    path: path.resolve(__dirname, "./dist/lambda"),
-    filename: "server.js",
+    path: path.resolve(__dirname, "./dist"),
+    filename: "lambda/server.js",
     libraryTarget: "commonjs2",
   },
   module: {
@@ -63,24 +63,24 @@ const server = {
       ...sharedRules,
       {
         test: /\.(sa|sc|c)ss$/,
-        use: [
-          {
-            loader: 'isomorphic-style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
+        use: ExtractTextPlugin.extract({
+          fallback: 'isomorphic-style-loader',
+          use: [
+            {
+              loader: 'css-loader',
             },
-          },
-          {
-            loader: 'sass-loader',
-          },
-        ],
+            {
+              loader: 'sass-loader',
+            },
+          ],
+        }),
       },
     ],
   },
   plugins: [
+    new ExtractTextPlugin({
+      filename: './assets/styles.css'
+    }),
     new CreateFileWebpack({
       path: "./dist/lambda",
       fileName: "package.json",
