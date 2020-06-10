@@ -1,3 +1,4 @@
+import AWS from 'aws-sdk'
 import serverless from 'serverless-http'
 import express from 'express'
 import indexRoutes from './routes/index.js'

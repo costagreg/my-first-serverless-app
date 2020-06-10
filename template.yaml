@@ -45,7 +45,7 @@ Resources:
       Runtime: nodejs12.x
       Environment:
         Variables:
-          TABLE: !Ref TABLENAME
+          TABLE_NAME: !Ref TABLENAME
           AWS_REGION: !Ref REGIONNAME
       Policies: AmazonDynamoDBFullAccess
       Events:
@@ -66,7 +66,10 @@ Resources:
       CodeUri: ./backend/dist/lambda/
       Handler: server.lambdaHandler
       Runtime: nodejs12.x
-
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref TABLENAME
+          AWS_REGION: !Ref REGIONNAME
       Events:
         RootEndPoint:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api

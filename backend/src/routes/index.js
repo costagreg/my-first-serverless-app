@@ -2,14 +2,16 @@ const express = require("express");
 
 const routes = (documentClient) => {
   const router = express.Router();
+  const tableName = process.env.TABLE_NAME || 'DEV_TABLE'
 
-  router.get("/", function (req, res, next) {
+
+  router.get("/api/", function (req, res, next) {
     res.send("response test");
   });
 
-  router.get("/urls", (req, res) => {
+  router.get("/api/urls", (req, res) => {
     var params = {
-      TableName: "DEV_TABLE",
+      TableName: tableName,
       ProjectionExpression: "#Id,#Name",
       ExpressionAttributeNames: {
         "#Id": "Id",
