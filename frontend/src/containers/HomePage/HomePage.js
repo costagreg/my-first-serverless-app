@@ -1,4 +1,12 @@
 import React from "react";
-import UrlInput from "../../components/UrlInput";
+import UrlInputForm from "../../components/UrlInputForm";
 
-export default () => <UrlInput />;
+export default () => (
+  <div>
+    <center>
+      <h2>URL Shortener!</h2>
+      <p>Simply copy & past your link and click the cut button!</p>
+    </center>
+    <UrlInputForm />
+  </div>
+);

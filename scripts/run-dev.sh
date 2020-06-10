@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# dir=$(pwd)
+dir=$(pwd)
 
 # Build bundles for lambda functions
 cd ${dir}/backend/ && npm run dev &
