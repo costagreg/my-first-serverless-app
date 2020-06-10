@@ -46,7 +46,7 @@ Resources:
       Environment:
         Variables:
           TABLE: !Ref TABLENAME
-          REGION: !Ref REGIONNAME
+          AWS_REGION: !Ref REGIONNAME
       Policies: AmazonDynamoDBFullAccess
       Events:
         RootEndPoint:
