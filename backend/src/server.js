@@ -1,18 +1,17 @@
 import AWS from 'aws-sdk'
 import serverless from 'serverless-http'
 import express from 'express'
+import bodyParser from 'body-parser'
 import indexRoutes from './routes/index.js'
 
-const app = new express()
-
-const awsRegion = process.env.AWS_REGION || "us-east-1";
-
 AWS.config.update({
-  region: awsRegion,
-});
+  region: process.env.AWS_REGION || 'us-east-1',
+})
 
-const documentClient = new AWS.DynamoDB.DocumentClient();
+const app = new express()
+const documentClient = new AWS.DynamoDB.DocumentClient()
 
+app.use(bodyParser.json())
 app.use(indexRoutes(documentClient))
 
 export const lambdaHandler = serverless(app)

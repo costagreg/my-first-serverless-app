@@ -1,5 +1,5 @@
-import React from "react";
-import UrlInputForm from "../../components/UrlInputForm";
+import React from 'react'
+import UrlInputForm from '../../components/UrlInputForm'
 
 export default () => (
   <div>
@@ -9,4 +9,4 @@ export default () => (
     </center>
     <UrlInputForm />
   </div>
-);
+)

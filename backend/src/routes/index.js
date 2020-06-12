@@ -1,42 +1,41 @@
-const express = require("express");
+import express from 'express'
+import { nanoid } from 'nanoid'
 
-const routes = (documentClient) => {
-  const router = express.Router();
+export default (documentClient) => {
+  const router = express.Router()
   const tableName = process.env.TABLE_NAME || 'DEV_TABLE'
 
+  router.post('/api/url', function (req, res, next) {
+    const { url } = req.body
 
-  router.get("/api/", function (req, res, next) {
-    res.send("response test");
-  });
-
-  router.get("/api/urls", (req, res) => {
-    var params = {
-      TableName: tableName,
-      ProjectionExpression: "#Id,#Name",
-      ExpressionAttributeNames: {
-        "#Id": "Id",
-        "#Name": "Name",
+    documentClient.put(
+      {
+        TableName: tableName,
+        Item: {
+          Id: nanoid(5),
+          Url: url,
+        },
+        ExpressionAttributeNames: {
+          '#Id': 'Id',
+        },
+        ConditionExpression: 'attribute_not_exists(#Id)',
       },
-    };
-
-    documentClient.scan(params, function (err, data) {
-      if (err) {
-        res.send({
-          success: false,
-          message: err,
-        });
-      } else {
-        const { Items } = data;
-        res.send({
-          success: true,
-          message: "Test response",
-          fruits: Items,
-        });
+      function (err, result) {
+        if (err) {
+          //TO-DO: handle collision better
+          res.status(500).send({
+            success: false,
+            message: 'Oops something went wrong. Please retry again.',
+          })
+        } else {
+          res.send({
+            success: true,
+            message: 'Url added.',
+          })
+        }
       }
-    });
-  });
+    )
+  })
 
-  return router;
-};
-
-module.exports = routes;
+  return router
+}

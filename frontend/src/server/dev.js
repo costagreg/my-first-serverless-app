@@ -24,5 +24,5 @@ app.use(
 app.use(webpackHotServerMiddleware(compiler, { chunkName: 'm' }))
 
 app.listen(port, () => {
-  console.log(`dev server listening on port ${port}`);
+  console.log(`dev server listening on port ${port}`)
 })

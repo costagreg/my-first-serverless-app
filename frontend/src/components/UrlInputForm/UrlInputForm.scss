@@ -1,0 +1,24 @@
+.urlInputForm{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin: 40px auto;
+  
+
+  &__input{
+    flex: 1;
+    border: 1px solid #cecece;
+    border-radius: 5px;
+    height: 40px;
+    margin: 0 10px 0 0;
+
+  }
+
+  &__submit{
+    box-sizing: content-box;
+    border: 1px solid #cecece;
+    border-radius: 5px;
+    height: 40px;
+  }
+}

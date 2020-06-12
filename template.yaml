@@ -45,7 +45,6 @@ Resources:
       Runtime: nodejs12.x
       Environment:
         Variables:
-          TABLE_NAME: !Ref TABLENAME
           AWS_REGION: !Ref REGIONNAME
       Policies: AmazonDynamoDBFullAccess
       Events:
@@ -53,11 +52,6 @@ Resources:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /
-            Method: any
-        EverythingElse:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-          Properties:
-            Path: /{proxy+}
             Method: any
   
   BackendApi:
@@ -71,15 +65,10 @@ Resources:
           TABLE_NAME: !Ref TABLENAME
           AWS_REGION: !Ref REGIONNAME
       Events:
-        RootEndPoint:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-          Properties:
-            Path: /api
-            Method: any
         EverythingElse:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /api/{proxy+}
+            Path: /{proxy+}
             Method: any
 
 Outputs:

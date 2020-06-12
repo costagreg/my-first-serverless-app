@@ -5,7 +5,9 @@
   "main": "src/server.js",
   "author": "Gregorio Alessio Costa",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "nanoid": "^3.1.9"
+  },
   "scripts": {
     "dev": "webpack -w --config  webpack.dev.config.js",
     "lambda:dev": "webpack --config webpack.lambda.config.js --mode development"

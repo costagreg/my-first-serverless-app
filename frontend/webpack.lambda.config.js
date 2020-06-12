@@ -1,15 +1,14 @@
-const path = require("path");
+const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const CreateFileWebpack = require("create-file-webpack");
-const Dotenv = require("dotenv-webpack");
-
+const CreateFileWebpack = require('create-file-webpack')
+const Dotenv = require('dotenv-webpack')
 
 const sharedRules = [
   {
     test: /\.(js|jsx)$/,
     exclude: /node_modules/,
     use: {
-      loader: "babel-loader",
+      loader: 'babel-loader',
     },
   },
   {
@@ -31,32 +30,32 @@ const sharedRules = [
 ]
 
 const client = {
-  name: "client",
-  target: "web",
-  entry: [path.resolve(__dirname, "./src/client.js")],
+  name: 'client',
+  target: 'web',
+  entry: [path.resolve(__dirname, './src/client.js')],
   output: {
-    path: path.resolve(__dirname, "./dist/assets"),
-    filename: "client.js",
+    path: path.resolve(__dirname, './dist/assets'),
+    filename: 'client.js',
   },
   module: {
     rules: [
       ...sharedRules,
       {
         test: /\.(sa|sc|c)ss$/,
-        use: "null-loader",
+        use: 'null-loader',
       },
     ],
   },
-};
+}
 
 const server = {
-  name: "server",
-  target: "node",
-  entry: [path.resolve(__dirname, "./src/server/serverless.js")],
+  name: 'server',
+  target: 'node',
+  entry: [path.resolve(__dirname, './src/server/serverless.js')],
   output: {
-    path: path.resolve(__dirname, "./dist"),
-    filename: "lambda/server.js",
-    libraryTarget: "commonjs2",
+    path: path.resolve(__dirname, './dist'),
+    filename: 'lambda/server.js',
+    libraryTarget: 'commonjs2',
   },
   module: {
     rules: [
@@ -79,15 +78,15 @@ const server = {
   },
   plugins: [
     new ExtractTextPlugin({
-      filename: './assets/styles.css'
+      filename: './assets/styles.css',
     }),
     new CreateFileWebpack({
-      path: "./dist/lambda",
-      fileName: "package.json",
+      path: './dist/lambda',
+      fileName: 'package.json',
       content: `{"name": "lambda-function", "version": "1.0.0"}`,
     }),
-    new Dotenv({ path: path.resolve(__dirname, "../.env") }),
+    new Dotenv({ path: path.resolve(__dirname, '../.env') }),
   ],
-};
+}
 
-module.exports = [client, server];
+module.exports = [client, server]
