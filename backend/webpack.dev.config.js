@@ -32,7 +32,7 @@ const server = {
       fileName: 'package.json',
       content: `{"name": "lambda-function", "version": "1.0.0"}`,
     }),
-    new Dotenv({ path: '../.env' }),
+    new Dotenv({ path: path.resolve(__dirname, './.env') }),
     new NodemonPlugin(),
   ],
 }

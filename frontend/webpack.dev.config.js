@@ -1,6 +1,7 @@
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const webpack = require('webpack')
+const Dotenv = require('dotenv-webpack')
 
 const sharedRules = [
   {
@@ -53,6 +54,7 @@ const client = {
         NODE_ENV: JSON.stringify('development'),
       },
     }),
+    new Dotenv({ path: path.resolve(__dirname, './.env') }),
   ],
   module: {
     rules: [
@@ -94,6 +96,9 @@ const server = {
     filename: '[name].js',
     libraryTarget: 'commonjs2',
   },
+  plugins: [
+    new Dotenv({ path: path.resolve(__dirname, './.env') }),
+  ],
   module: {
     rules: [
       ...sharedRules,

@@ -8,12 +8,13 @@ const HomePage = () => {
   const [response, setResponse] = useState('')
 
   const createUrl = (url) => {
+    const apiUrl = process.env.API_URL ? process.env.API_URL : '/'
+
     axios
-      .post('http://localhost:5000/api/url', {
+      .post(`${apiUrl}api/url`, {
         url,
       })
       .then((response) => {
-        console.log(response)
         setResponse(response)
       })
       .catch((error) => {

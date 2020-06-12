@@ -11,7 +11,7 @@
   },
   "scripts": {
     "dev": "webpack -w --config  webpack.dev.config.js",
-    "lambda:dev": "webpack --config webpack.lambda.config.js --mode development"
+    "lambda:dev": "LAMBDA_ENV=local webpack --config webpack.lambda.config.js --mode production"
   },
   "devDependencies": {
     "@babel/core": "^7.10.1",
