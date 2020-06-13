@@ -20,7 +20,7 @@ Parameters:
     Type: String
     Description: Default region for deployment.
     Default: 'us-east-1'
-  
+
 Resources:
   UrlsTable:
     Type: AWS::DynamoDB::Table
@@ -45,8 +45,7 @@ Resources:
       Runtime: nodejs12.x
       Environment:
         Variables:
-          AWS_REGION: !Ref REGIONNAME
-          LAMBDA_ENV: 'local'
+          AWS_REGION_NAME: !Ref REGIONNAME
       Policies: AmazonDynamoDBFullAccess
       Events:
         RootEndPoint:
@@ -64,8 +63,7 @@ Resources:
       Environment:
         Variables:
           TABLE_NAME: !Ref TABLENAME
-          AWS_REGION: !Ref REGIONNAME
-          LAMBDA_ENV: 'local'
+          AWS_REGION_NAME: !Ref REGIONNAME
       Events:
         EverythingElse:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api

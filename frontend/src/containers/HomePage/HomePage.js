@@ -8,7 +8,7 @@ const HomePage = () => {
   const [response, setResponse] = useState('')
 
   const createUrl = (url) => {
-    const apiUrl = process.env.API_URL ? process.env.API_URL : '/'
+    const apiUrl = process.env.API_URL ? process.env.API_URL : '//'
 
     axios
       .post(`${apiUrl}api/url`, {

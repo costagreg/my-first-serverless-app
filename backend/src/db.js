@@ -1,6 +1,6 @@
 import AWS from 'aws-sdk'
 
-const awsRegion = process.env.AWS_REGION || 'us-east-1'
+const awsRegion = process.env.AWS_REGION_NAME || 'us-east-1'
 
 const documentClient = new AWS.DynamoDB.DocumentClient({
   region: awsRegion,

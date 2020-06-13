@@ -6,6 +6,7 @@ dir=$(pwd)
 cd ${dir}/backend/ && npm run lambda:dev
 cd ${dir}/frontend/ && npm run lambda:dev
 
+
 # Upload assets to S3
 aws s3 cp ${dir}/frontend/dist/assets s3://$S3_BUILD_URL/local/assets/ --recursive --acl public-read
 

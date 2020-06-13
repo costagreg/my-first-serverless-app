@@ -18,7 +18,7 @@
   },
   "scripts": {
     "dev": "PORT=8080 NODE_ENV=development node src/server/dev",
-    "lambda:dev": "LAMBDA_ENV=local webpack --config webpack.lambda.config.js --mode production"
+    "lambda:dev": "webpack --config webpack.lambda.config.js --mode production"
   },
   "devDependencies": {
     "@babel/core": "^7.10.1",
