@@ -2,11 +2,11 @@ import React from 'react'
 
 import './UrlShortenerOutput.scss'
 
-export default () => {
+export default ({urlShortened}) => {
 
   return (
     <div className='urlShortenerOutput'>
-      test output
+      {urlShortened}
     </div>
   )
 }

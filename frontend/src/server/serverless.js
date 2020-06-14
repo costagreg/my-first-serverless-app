@@ -16,7 +16,7 @@ const lambdaApiUrl = (event) => {
   const host = event.headers.Host
   const stage = event.requestContext.stage
 
-  return isLambdaProd(event) ? `https://${host}/${stage}/` : `http://127.0.0.1:3000/`
+  return isLambdaProd(event) ? `https://${host}/${stage}` : `http://127.0.0.1:3000`
 }
 
 app.get('/', (req, res) => {

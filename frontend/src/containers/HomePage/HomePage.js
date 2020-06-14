@@ -4,17 +4,20 @@ import UrlShortenerOutput from '../../components/UrlShortenerOutput'
 import axios from 'axios'
 
 const HomePage = ({ appConfig = {} }) => {
-  const { apiUrl  } = appConfig
+  const { apiUrl } = appConfig
   const [error, setError] = useState('')
-  const [response, setResponse] = useState('')
+  const [urlShortened, setUrlShortened] = useState('')
 
   const createUrl = (url) => {
     axios
-      .post(`${apiUrl}api/url`, {
+      .post(`${apiUrl}/api/url`, {
         url,
       })
-      .then((response) => {
-        setResponse(response)
+      .then(({ data: responseData }) => {
+        const { data } = responseData
+        const { id } = data
+
+        setUrlShortened(`${apiUrl}/${id}`)
       })
       .catch((error) => {
         setError(error)
@@ -28,7 +31,7 @@ const HomePage = ({ appConfig = {} }) => {
         <p>Simply copy & paste your link and click the cut button!</p>
       </center>
       <UrlInputForm createUrl={createUrl} error={error} />
-      <UrlShortenerOutput error={error} response={response} />
+      <UrlShortenerOutput error={error} urlShortened={urlShortened} />
     </div>
   )
 }
