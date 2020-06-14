@@ -3,13 +3,12 @@ import UrlInputForm from '../../components/UrlInputForm'
 import UrlShortenerOutput from '../../components/UrlShortenerOutput'
 import axios from 'axios'
 
-const HomePage = () => {
+const HomePage = ({ appConfig = {} }) => {
+  const { apiUrl  } = appConfig
   const [error, setError] = useState('')
   const [response, setResponse] = useState('')
 
   const createUrl = (url) => {
-    const apiUrl = process.env.API_URL ? process.env.API_URL : '//'
-
     axios
       .post(`${apiUrl}api/url`, {
         url,

@@ -4,7 +4,7 @@ Description: >
   my-first-serverless-app
 
   Sample SAM Template for my-first-serverless-app
-  
+
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
@@ -29,14 +29,13 @@ Resources:
       AttributeDefinitions:
         - AttributeName: Id
           AttributeType: S
-      KeySchema: 
+      KeySchema:
         - AttributeName: Id
           KeyType: HASH
-      ProvisionedThroughput: 
+      ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
 
-  
   FrontEnd:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
@@ -46,14 +45,13 @@ Resources:
       Environment:
         Variables:
           AWS_REGION_NAME: !Ref REGIONNAME
-      Policies: AmazonDynamoDBFullAccess
       Events:
         RootEndPoint:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /
             Method: any
-  
+
   BackendApi:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
@@ -64,6 +62,7 @@ Resources:
         Variables:
           TABLE_NAME: !Ref TABLENAME
           AWS_REGION_NAME: !Ref REGIONNAME
+      Policies: AmazonDynamoDBFullAccess
       Events:
         EverythingElse:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
@@ -73,5 +72,5 @@ Resources:
 
 Outputs:
   ProdDataEndpoint:
-    Description: "API Prod stage endpoint"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+    Description: 'API Prod stage endpoint'
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/'
