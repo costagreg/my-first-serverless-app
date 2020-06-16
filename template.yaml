@@ -11,27 +11,27 @@ Globals:
     Timeout: 10
 
 Parameters:
-  TABLENAME:
+  TableName:
     Type: String
     Description: The DynamoDB table for storing URLs information.
     Default: 'UrlsTable'
 
-  REGIONNAME:
+  RegionName:
     Type: String
     Description: Default region for deployment.
     Default: 'us-east-1'
 
-  DOMAINNAME:
+  DomainName:
     Type: String
     Description: Domain name.
     Default: 'example.com'
 
-  CERTIFICATEARN:
+  CertificateARN:
     Description: Certificate ARN for your domain.
     Type: String
     Default: 'cert-arn-in-us-east-1'
 
-  HOSTEDZONENAME:
+  HostedZoneName:
     Description: Hosted zone name
     Type: String
     Default: 'example.com.'    
@@ -40,7 +40,7 @@ Resources:
   UrlsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: !Ref TABLENAME
+      TableName: !Ref TableName
       AttributeDefinitions:
         - AttributeName: Id
           AttributeType: S
@@ -59,7 +59,7 @@ Resources:
       Runtime: nodejs12.x
       Environment:
         Variables:
-          AWS_REGION_NAME: !Ref REGIONNAME
+          AWS_REGION_NAME: !Ref RegionName
       Events:
         RootEndPoint:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
@@ -75,8 +75,8 @@ Resources:
       Runtime: nodejs12.x
       Environment:
         Variables:
-          TABLE_NAME: !Ref TABLENAME
-          AWS_REGION_NAME: !Ref REGIONNAME
+          TABLE_NAME: !Ref TableName
+          AWS_REGION_NAME: !Ref RegionName
       Policies: AmazonDynamoDBFullAccess
       Events:
         EverythingElse:
@@ -88,8 +88,8 @@ Resources:
   APIDomainName:
     Type: AWS::ApiGateway::DomainName
     Properties:
-      CertificateArn: !Ref CERTIFICATEARN
-      DomainName: !Ref DOMAINNAME
+      CertificateArn: !Ref CertificateARN
+      DomainName: !Ref DomainName
   
   APIBasePathMapping:
     Type: AWS::ApiGateway::BasePathMapping
@@ -101,9 +101,9 @@ Resources:
   APIDomain:
     Type: AWS::Route53::RecordSetGroup
     Properties:
-      HostedZoneName: !Ref HOSTEDZONENAME
+      HostedZoneName: !Ref HostedZoneName
       RecordSets:
-      - Name: !Ref DOMAINNAME
+      - Name: !Ref DomainName
         Type: A
         AliasTarget:
           DNSName: !GetAtt APIDomainName.DistributionDomainName
