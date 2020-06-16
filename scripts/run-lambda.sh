@@ -19,7 +19,7 @@ cd ${dir}
 sam build
 
 if [ $lambdaenv = "prod" ]; then
-  sam deploy
+  sam deploy 
 else
   sam local start-api
 fi

@@ -21,6 +21,21 @@ Parameters:
     Description: Default region for deployment.
     Default: 'us-east-1'
 
+  DOMAINNAME:
+    Type: String
+    Description: Domain name.
+    Default: 'example.com'
+
+  CERTIFICATEARN:
+    Description: Certificate ARN for your domain.
+    Type: String
+    Default: 'cert-arn-in-us-east-1'
+
+  HOSTEDZONENAME:
+    Description: Hosted zone name
+    Type: String
+    Default: 'example.com.'    
+
 Resources:
   UrlsTable:
     Type: AWS::DynamoDB::Table
@@ -70,7 +85,31 @@ Resources:
             Path: /{proxy+}
             Method: any
 
-Outputs:
-  ProdDataEndpoint:
-    Description: 'API Prod stage endpoint'
-    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/'
+  APIDomainName:
+    Type: AWS::ApiGateway::DomainName
+    Properties:
+      CertificateArn: !Ref CERTIFICATEARN
+      DomainName: !Ref DOMAINNAME
+  
+  APIBasePathMapping:
+    Type: AWS::ApiGateway::BasePathMapping
+    Properties:
+      DomainName: !Ref APIDomainName
+      RestApiId: !Ref ServerlessRestApi
+      Stage: Prod
+
+  APIDomain:
+    Type: AWS::Route53::RecordSetGroup
+    Properties:
+      HostedZoneName: !Ref HOSTEDZONENAME
+      RecordSets:
+      - Name: !Ref DOMAINNAME
+        Type: A
+        AliasTarget:
+          DNSName: !GetAtt APIDomainName.DistributionDomainName
+          HostedZoneId: Z2FDTNDATAQYW2 # static ID for CloudFront aliases
+
+# Outputs:
+#   ProdDataEndpoint:
+#     Description: 'API Prod stage endpoint'
+#     Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/'
