@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomePage @renders renders the Dashboard without any error 1`] = `
+<DocumentFragment>
+  <div>
+    <center>
+      <h2>
+        URL Shortener!
+      </h2>
+      <p>
+        Simply copy & paste your link and click the cut button!
+      </p>
+    </center>
+    <form
+      class="urlInputForm"
+    >
+      <input
+        class="urlInputForm__input"
+        type="text"
+        value=""
+      />
+      <input
+        class="urlInputForm__submit"
+        type="submit"
+        value="Cut me!"
+      />
+    </form>
+    <div
+      class="urlShortenerOutput"
+    />
+  </div>
+</DocumentFragment>
+`;

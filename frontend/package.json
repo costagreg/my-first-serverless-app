@@ -18,12 +18,15 @@
   },
   "scripts": {
     "dev": "PORT=8080 NODE_ENV=development node src/server/dev",
-    "lambda:dev": "webpack --config webpack.lambda.config.js --mode production"
+    "lambda:dev": "webpack --config webpack.lambda.config.js --mode production",
+    "jest": "jest"
   },
   "devDependencies": {
     "@babel/core": "^7.10.1",
     "@babel/preset-env": "^7.10.1",
     "@babel/preset-react": "^7.10.1",
+    "@testing-library/jest-dom": "^5.10.1",
+    "@testing-library/react": "^10.2.1",
     "babel-loader": "^8.1.0",
     "create-file-webpack": "^1.0.2",
     "cross-env": "^7.0.2",
@@ -31,6 +34,7 @@
     "dotenv-webpack": "^1.8.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "isomorphic-style-loader": "5.1.0",
+    "jest": "^26.0.1",
     "node-sass": "4.14.1",
     "npm-run-all": "^4.1.5",
     "sass-loader": "8.0.2",
@@ -41,5 +45,13 @@
     "webpack-hot-middleware": "^2.25.0",
     "webpack-hot-server-middleware": "0.6.1",
     "webpack-node-externals": "1.7.2"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>src/setupTests.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|css|less|scss)$": "<rootDir>/__mocks__/fileMock.js"
+    }
   }
 }
