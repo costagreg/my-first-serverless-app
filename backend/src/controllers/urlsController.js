@@ -1,7 +1,6 @@
-import documentClient, { tableName } from '../db'
 import { nanoid } from 'nanoid'
 
-const urlsController = {
+const urlsController = (documentClient, tableName) => ({
   addUrl: (req, res) => {
     const { url } = req.body
     const id = nanoid(5)
@@ -21,8 +20,6 @@ const urlsController = {
       },
       function (err, result) {
         if (err) {
-          console.error(err)
-          //TO-DO: handle collision better
           res.status(500).send({
             success: false,
             message: 'Oops something went wrong. Please retry again',
@@ -40,7 +37,7 @@ const urlsController = {
       }
     )
   },
-  getUrl: (req, res) => {
+  redirectUrl: (req, res) => {
     const { id } = req.params
 
     documentClient.update(
@@ -58,9 +55,9 @@ const urlsController = {
       },
       function (err, result) {
         if (err) {
-          res.status(500).send({
+          res.status(404).send({
             success: false,
-            message: 'Oops something went wrong. Please retry again',
+            message: 'Oops we cannot find this url.',
             error: err,
           })
         } else {
@@ -70,7 +67,7 @@ const urlsController = {
         }
       }
     )
-  },
-}
+  }
+})
 
 export default urlsController
