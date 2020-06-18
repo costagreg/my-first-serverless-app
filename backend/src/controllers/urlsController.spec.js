@@ -58,7 +58,7 @@ describe('urlsController', () => {
 
       expect(res.send).toHaveBeenCalledTimes(1)
       expect(res.send).toHaveBeenCalledWith({
-        data: {
+        result: {
           id: 'nanoIdMock',
         },
         message: 'Url added',

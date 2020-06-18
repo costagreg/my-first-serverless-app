@@ -29,7 +29,7 @@ const urlsController = (documentClient, tableName) => ({
           res.send({
             success: true,
             message: 'Url added',
-            data: {
+            result: {
               id,
             },
           })
@@ -67,7 +67,7 @@ const urlsController = (documentClient, tableName) => ({
         }
       }
     )
-  }
+  },
 })
 
 export default urlsController

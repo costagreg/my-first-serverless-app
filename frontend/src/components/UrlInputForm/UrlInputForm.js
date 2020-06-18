@@ -18,6 +18,7 @@ const UrlInputForm = (props) => {
       <input
         className="urlInputForm__input"
         type="text"
+        placeholder="https://www.example.com"
         {...bindInput}
       />
       <input className="urlInputForm__submit" value="Cut me!" type="submit" />

@@ -7,6 +7,7 @@ exports[`UrlInputForm @renders renders UrlInputFormwithout any error 1`] = `
   >
     <input
       class="urlInputForm__input"
+      placeholder="https://www.example.com"
       type="text"
       value=""
     />

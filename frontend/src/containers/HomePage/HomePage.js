@@ -8,21 +8,21 @@ const HomePage = ({ appConfig = {} }) => {
   const [error, setError] = useState('')
   const [urlShortened, setUrlShortened] = useState('')
 
-  const createUrl = (url) => {
+  const createUrl = (url) =>
     axios
       .post(`${apiUrl}/api/url`, {
         url,
       })
-      .then(({ data: responseData }) => {
-        const { data } = responseData
-        const { id } = data
+      .then(({ data }) => {
+        const { result } = data
+        const { id } = result
 
         setUrlShortened(`${apiUrl}/${id}`)
       })
       .catch((error) => {
-        setError(error)
+        // setError(error)
+        console.log(error)
       })
-  }
 
   return (
     <div>
