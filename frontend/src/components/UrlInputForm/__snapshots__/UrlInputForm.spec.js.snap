@@ -1,5 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`UrlInputForm @renders renders UrlInputForm without any error 1`] = `
+<DocumentFragment>
+  <form
+    class="urlInputForm"
+  >
+    <input
+      class="urlInputForm__input"
+      placeholder="https://www.example.com"
+      type="text"
+      value=""
+    />
+    <input
+      class="urlInputForm__submit"
+      type="submit"
+      value="Cut me!"
+    />
+  </form>
+</DocumentFragment>
+`;
+
 exports[`UrlInputForm @renders renders UrlInputFormwithout any error 1`] = `
 <DocumentFragment>
   <form

@@ -1,12 +1,13 @@
 import React from 'react'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 import useInput from '../../hooks/useInput'
 
 import './UrlInputForm.scss'
 
 const UrlInputForm = (props) => {
   const { value, bindInput } = useInput('')
-  const { createUrl }  = props
+  const { createUrl, error } = props
 
   const handleSubmit = (evt) => {
     createUrl(value)
@@ -16,7 +17,9 @@ const UrlInputForm = (props) => {
   return (
     <form className="urlInputForm" onSubmit={handleSubmit}>
       <input
-        className="urlInputForm__input"
+        className={classNames('urlInputForm__input', {
+          'urlInputForm__input--error': error,
+        })}
         type="text"
         placeholder="https://www.example.com"
         {...bindInput}
@@ -28,8 +31,7 @@ const UrlInputForm = (props) => {
 
 UrlInputForm.propTypes = {
   createUrl: PropTypes.func.isRequired,
-  error: PropTypes.string
-
+  error: PropTypes.string,
 }
 
 export default UrlInputForm

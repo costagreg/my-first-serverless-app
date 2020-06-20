@@ -21,11 +21,11 @@ const HomePage = ({ appConfig = {} }) => {
           const { result } = data
           const { id } = result
 
+          setError('')
           setUrlShortened(`${apiUrl}/${id}`)
         })
         .catch((error) => {
-          // setError(error)
-          console.log(error)
+          setError('Ops something went wrong')
         })
     } else {
       setError('Url not valid')

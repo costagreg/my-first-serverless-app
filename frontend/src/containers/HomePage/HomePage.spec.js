@@ -1,6 +1,6 @@
 import React from 'react'
 import HomePage from './HomePage'
-import { render, fireEvent, waitFor, screen } from '@testing-library/react'
+import { render, fireEvent, waitFor } from '@testing-library/react'
 import mockAxios from 'axios'
 
 jest.mock('axios')
@@ -23,13 +23,15 @@ describe('HomePage', () => {
   })
 
   describe('@submit', () => {
-    mockAxios.post.mockImplementation(() =>
-      Promise.resolve({
-        data: {
-          result: { id: 'xysuk' },
-        },
-      })
-    )
+    beforeEach(() => {
+      mockAxios.post.mockImplementation(() =>
+        Promise.resolve({
+          data: {
+            result: { id: 'xysuk' },
+          },
+        })
+      )
+    })
 
     describe('It is a valid URL', () => {
       it('should call the API to add the url', async () => {
@@ -60,20 +62,20 @@ describe('HomePage', () => {
 
           const urlInput = getByRole('textbox')
           const submitButton = getByRole('button')
-  
+
           fireEvent.change(urlInput, {
             target: { value: 'www.example.com/' },
           })
-  
+
           fireEvent.click(submitButton)
-  
+
           expect(mockAxios.post).toHaveBeenCalledWith(
             'http://api.test.com/api/url',
             {
               url: 'https://www.example.com/',
             }
           )
-  
+
           await waitFor(() => getByText('http://api.test.com/xysuk'))
         })
       })
@@ -95,6 +97,31 @@ describe('HomePage', () => {
         expect(mockAxios.post).toHaveBeenCalledTimes(0)
 
         await waitFor(() => getByText('Url not valid'))
+      })
+    })
+
+    describe('Something went wrong on the call', () => {
+      beforeEach(() => {
+        mockAxios.post.mockImplementation(() =>
+          Promise.reject({
+            error: 'Something really wrong :)',
+          })
+        )
+      })
+
+      it('should show an error', async () => {
+        const { getByRole, getByText } = render(<HomePage {...props} />)
+
+        const urlInput = getByRole('textbox')
+        const submitButton = getByRole('button')
+
+        fireEvent.change(urlInput, {
+          target: { value: 'example.com' },
+        })
+
+        fireEvent.click(submitButton)
+
+        await waitFor(() => getByText('Ops something went wrong'))
       })
     })
   })
