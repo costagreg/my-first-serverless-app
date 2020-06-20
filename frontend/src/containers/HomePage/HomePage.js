@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import UrlInputForm from '../../components/UrlInputForm'
 import UrlShortenerOutput from '../../components/UrlShortenerOutput'
-import { isValidUrl } from '../../helpers/urlHelpers'
+import { isValidUrl, sanitiseUrl } from '../../helpers/urlHelpers'
 import axios from 'axios'
 
 
@@ -15,7 +15,7 @@ const HomePage = ({ appConfig = {} }) => {
     if (isValidUrl(url)) {
       axios
         .post(`${apiUrl}/api/url`, {
-          url,
+          url: sanitiseUrl(url),
         })
         .then(({ data }) => {
           const { result } = data
