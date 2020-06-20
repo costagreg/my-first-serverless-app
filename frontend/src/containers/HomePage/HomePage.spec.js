@@ -10,6 +10,10 @@ const props = {
 }
 
 describe('HomePage', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
   describe('@renders', () => {
     it('renders the Dashboard without any error', () => {
       const { asFragment } = render(<HomePage {...props} />)
@@ -27,26 +31,47 @@ describe('HomePage', () => {
       })
     )
 
-    it('should call the API to add the url', async () => {
-      const { getByRole, getByText } = render(<HomePage {...props} />)
+    describe('It is a valid URL', () => {
+      it('should call the API to add the url', async () => {
+        const { getByRole, getByText } = render(<HomePage {...props} />)
 
-      const urlInput = getByRole('textbox')
-      const submitButton = getByRole('button')
+        const urlInput = getByRole('textbox')
+        const submitButton = getByRole('button')
 
-      fireEvent.change(urlInput, {
-        target: { value: 'http://www.example.com/' },
+        fireEvent.change(urlInput, {
+          target: { value: 'http://www.example.com/' },
+        })
+
+        fireEvent.click(submitButton)
+
+        expect(mockAxios.post).toHaveBeenCalledWith(
+          'http://api.test.com/api/url',
+          {
+            url: 'http://www.example.com/',
+          }
+        )
+
+        await waitFor(() => getByText('http://api.test.com/xysuk'))
       })
+    })
 
-      fireEvent.click(submitButton)
+    describe('It is not a valid URL', () => {
+      it('should not call the API and should show an alert', async () => {
+        const { getByRole, getByText } = render(<HomePage {...props} />)
 
-      expect(mockAxios.post).toHaveBeenCalledWith(
-        'http://api.test.com/api/url',
-        {
-          url: 'http://www.example.com/',
-        }
-      )
+        const urlInput = getByRole('textbox')
+        const submitButton = getByRole('button')
 
-      await waitFor(() => getByText('http://api.test.com/xysuk'))
+        fireEvent.change(urlInput, {
+          target: { value: 'example' },
+        })
+
+        fireEvent.click(submitButton)
+
+        expect(mockAxios.post).toHaveBeenCalledTimes(0)
+
+        await waitFor(() => getByText('Url not valid'))
+      })
     })
   })
 })
