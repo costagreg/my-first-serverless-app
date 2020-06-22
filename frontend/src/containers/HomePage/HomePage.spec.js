@@ -1,6 +1,7 @@
 import React from 'react'
 import HomePage from './HomePage'
 import { render, fireEvent, waitFor } from '@testing-library/react'
+import { URL_INPUT_PLACEHOLDER} from '../../components/UrlInputForm/UrlInputForm'
 import mockAxios from 'axios'
 
 jest.mock('axios')
@@ -35,9 +36,8 @@ describe('HomePage', () => {
 
     describe('It is a valid URL', () => {
       it('should call the API to add the url', async () => {
-        const { getByRole, getByText } = render(<HomePage {...props} />)
-
-        const urlInput = getByRole('textbox')
+        const { getByPlaceholderText, getByText, getByRole } = render(<HomePage {...props} />)
+        const urlInput = getByPlaceholderText(URL_INPUT_PLACEHOLDER)
         const submitButton = getByRole('button')
 
         fireEvent.change(urlInput, {
@@ -58,9 +58,9 @@ describe('HomePage', () => {
 
       describe('Does not contain a protocol', () => {
         it('adds https', async () => {
-          const { getByRole, getByText } = render(<HomePage {...props} />)
+          const { getByPlaceholderText, getByRole, getByText } = render(<HomePage {...props} />)
 
-          const urlInput = getByRole('textbox')
+          const urlInput = getByPlaceholderText(URL_INPUT_PLACEHOLDER)
           const submitButton = getByRole('button')
 
           fireEvent.change(urlInput, {
@@ -83,9 +83,9 @@ describe('HomePage', () => {
 
     describe('It is not a valid URL', () => {
       it('should not call the API and should show an alert', async () => {
-        const { getByRole, getByText } = render(<HomePage {...props} />)
+        const { getByPlaceholderText, getByRole, getByText } = render(<HomePage {...props} />)
 
-        const urlInput = getByRole('textbox')
+        const urlInput = getByPlaceholderText(URL_INPUT_PLACEHOLDER)
         const submitButton = getByRole('button')
 
         fireEvent.change(urlInput, {
@@ -110,9 +110,9 @@ describe('HomePage', () => {
       })
 
       it('should show an error', async () => {
-        const { getByRole, getByText } = render(<HomePage {...props} />)
+        const { getByPlaceholderText, getByRole, getByText } = render(<HomePage {...props} />)
 
-        const urlInput = getByRole('textbox')
+        const urlInput = getByPlaceholderText(URL_INPUT_PLACEHOLDER)
         const submitButton = getByRole('button')
 
         fireEvent.change(urlInput, {

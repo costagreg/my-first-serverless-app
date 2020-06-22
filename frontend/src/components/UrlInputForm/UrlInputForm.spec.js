@@ -1,5 +1,5 @@
 import React from 'react'
-import UrlInputForm from './UrlInputForm'
+import UrlInputForm, { URL_INPUT_PLACEHOLDER } from './UrlInputForm'
 import { render, fireEvent } from '@testing-library/react'
 
 describe('UrlInputForm', () => {
@@ -12,9 +12,11 @@ describe('UrlInputForm', () => {
 
     describe('error is passed as prop', () => {
       it('adds a classname to input', () => {
-        const { getByRole } = render(<UrlInputForm error='Url not valid' />)
+        const { getByPlaceholderText } = render(
+          <UrlInputForm error="Url not valid" />
+        )
 
-        const urlInput = getByRole('textbox')
+        const urlInput = getByPlaceholderText(URL_INPUT_PLACEHOLDER)
 
         expect(urlInput).toHaveClass('urlInputForm__input--error')
       })
@@ -24,11 +26,11 @@ describe('UrlInputForm', () => {
   describe('@submit', () => {
     it('should call createUrl prop', () => {
       const createUrl = jest.fn(() => {})
-      const { getByRole } = render(
+      const { getByPlaceholderText, getByRole } = render(
         <UrlInputForm createUrl={createUrl} />
       )
 
-      const urlInput = getByRole('textbox')
+      const urlInput = getByPlaceholderText(URL_INPUT_PLACEHOLDER)
       const submitButton = getByRole('button')
 
       fireEvent.change(urlInput, {

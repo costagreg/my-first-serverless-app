@@ -4,6 +4,10 @@ exports[`UrlShortenerOutput @renders renders UrlShortenerOutput without any erro
 <DocumentFragment>
   <div
     class="urlShortenerOutput"
-  />
+  >
+    <textarea
+      class="urlShortenerOutput__link"
+    />
+  </div>
 </DocumentFragment>
 `;

@@ -1,9 +1,42 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
+import classNames from 'classnames'
 
 import './UrlShortenerOutput.scss'
 
-export default ({ urlShortened, error }) => {
+const UrlShortenerOutputLink = ({ urlShortened }) => {
+  const urlShortenedRef = useRef()
+  const [hasCopySuccessed, setHasCopySuccessed] = useState(false)
+
+  const copyToClipboard = (e) => {
+    urlShortenedRef.current.select()
+    document.execCommand('copy')
+    urlShortenedRef.current.focus()
+    setHasCopySuccessed(true)
+  }
+
   return (
-    <div className="urlShortenerOutput">{error ? error : urlShortened}</div>
+    <>
+      <textarea
+        className={classNames('urlShortenerOutput__link')}
+        ref={urlShortenedRef}
+        onClick={copyToClipboard}
+        value={urlShortened}
+      />
+      {hasCopySuccessed && (
+        <span className="urlShortenerOutput__copiedMessage">
+          Copied to clipboard!
+        </span>
+      )}
+    </>
   )
 }
+
+export default ({ urlShortened, error }) => (
+  <div
+    className={classNames('urlShortenerOutput', {
+      'urlShortenerOutput--error': error,
+    })}
+  >
+    {error ? error : <UrlShortenerOutputLink urlShortened={urlShortened} />}
+  </div>
+)

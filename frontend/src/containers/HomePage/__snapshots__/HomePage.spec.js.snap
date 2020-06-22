@@ -28,7 +28,11 @@ exports[`HomePage @renders renders the Dashboard without any error 1`] = `
     </form>
     <div
       class="urlShortenerOutput"
-    />
+    >
+      <textarea
+        class="urlShortenerOutput__link"
+      />
+    </div>
   </div>
 </DocumentFragment>
 `;
