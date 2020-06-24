@@ -8,10 +8,12 @@ const UrlShortenerOutputLink = ({ urlShortened }) => {
   const [hasCopySuccessed, setHasCopySuccessed] = useState(false)
 
   const copyToClipboard = (e) => {
-    urlShortenedRef.current.select()
-    document.execCommand('copy')
-    urlShortenedRef.current.focus()
-    setHasCopySuccessed(true)
+    if (urlShortened) {
+      urlShortenedRef.current.select()
+      document.execCommand('copy')
+      urlShortenedRef.current.focus()
+      setHasCopySuccessed(true)
+    }
   }
 
   return (
@@ -21,6 +23,7 @@ const UrlShortenerOutputLink = ({ urlShortened }) => {
         ref={urlShortenedRef}
         onClick={copyToClipboard}
         value={urlShortened}
+        readOnly
       />
       {hasCopySuccessed && (
         <span className="urlShortenerOutput__copiedMessage">

@@ -40,5 +40,22 @@ describe('UrlShortenerOutput', () => {
       expect(global.document.execCommand).toHaveBeenCalledTimes(1)
       expect(global.document.execCommand).toHaveBeenCalledWith('copy')
     })
+
+    describe('textarea is empty', () => {
+      it('should not copy to clipboard', () => {
+        const { getByRole, queryByText } = render(
+          <UrlShortenerOutput urlShortened="" />
+        )
+  
+        const textLink = getByRole('textbox')
+        
+        fireEvent.click(textLink)
+  
+        expect(queryByText('Copied to clipboard!')).toBeNull()
+  
+        expect(global.document.execCommand).toHaveBeenCalledTimes(0)
+
+      })
+    })
   })
 })
