@@ -34,7 +34,7 @@ Parameters:
   HostedZoneName:
     Description: Hosted zone name
     Type: String
-    Default: 'example.com.'    
+    Default: 'example.com.'
 
 Resources:
   UrlsTable:
@@ -51,6 +51,26 @@ Resources:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
 
+  ServerlessApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      Cors: "'*'"
+      Auth:
+        DefaultAuthorizer: CognitoAuthorizer
+        Authorizers:
+          CognitoAuthorizer:
+            UserPoolArn: !GetAtt UserPool.Arn
+      GatewayResponses:
+        UNAUTHORIZED:
+          StatusCode: 401
+          ResponseParameters:
+            Headers:
+              Access-Control-Expose-Headers: "'WWW-Authenticate'"
+              Access-Control-Allow-Origin: "'*'"
+              WWW-Authenticate: >-
+                'Bearer realm="admin"'
+
   FrontEnd:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
@@ -64,8 +84,11 @@ Resources:
         RootEndPoint:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
+            RestApiId: !Ref ServerlessApi
             Path: /
             Method: any
+            Auth:
+              Authorizer: NONE
 
   BackendApi:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -77,39 +100,81 @@ Resources:
         Variables:
           TABLE_NAME: !Ref TableName
           AWS_REGION_NAME: !Ref RegionName
+          USER_POOL_ID: !Ref UserPool
+          USER_POOL_CLIENT_ID: !Ref UserPoolClient
       Policies: AmazonDynamoDBFullAccess
       Events:
-        EverythingElse:
+        UnauthorizedRoutes:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
+            RestApiId: !Ref ServerlessApi
             Path: /{proxy+}
             Method: any
+            Auth:
+              Authorizer: NONE
+
+  UserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: ApiUserPool
+      # LambdaConfig:
+      #   PreSignUp: !GetAtt PreSignupFunction.Arn
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 6
+
+  UserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId: !Ref UserPool
+      ClientName: ApiUserPoolClient
+      GenerateSecret: no
+
+  # PreSignupFunction:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     Handler: index.handler
+  #     Runtime: nodejs12.x
+  #     InlineCode: |
+  #       exports.handler = async event => {
+  #         event.response = { autoConfirmUser: true };
+  #         return event;
+  #       };
+
+  # LambdaCognitoUserPoolExecutionPermission:
+  #   Type: AWS::Lambda::Permission
+  #   Properties:
+  #     Action: lambda:InvokeFunction
+  #     FunctionName: !GetAtt PreSignupFunction.Arn
+  #     Principal: cognito-idp.amazonaws.com
+  #     SourceArn: !Sub 'arn:${AWS::Partition}:cognito-idp:${AWS::Region}:${AWS::AccountId}:userpool/${UserPool}'
 
   APIDomainName:
     Type: AWS::ApiGateway::DomainName
     Properties:
       CertificateArn: !Ref CertificateARN
       DomainName: !Ref DomainName
-  
+
   APIBasePathMapping:
     Type: AWS::ApiGateway::BasePathMapping
     Properties:
       DomainName: !Ref APIDomainName
-      RestApiId: !Ref ServerlessRestApi
+      RestApiId: !Ref ServerlessApi
       Stage: Prod
+
 
   APIDomain:
     Type: AWS::Route53::RecordSetGroup
     Properties:
       HostedZoneName: !Ref HostedZoneName
       RecordSets:
-      - Name: !Ref DomainName
-        Type: A
-        AliasTarget:
-          DNSName: !GetAtt APIDomainName.DistributionDomainName
-          HostedZoneId: Z2FDTNDATAQYW2 # static ID for CloudFront aliases
+        - Name: !Ref DomainName
+          Type: A
+          AliasTarget:
+            DNSName: !GetAtt APIDomainName.DistributionDomainName
+            HostedZoneId: Z2FDTNDATAQYW2 # static ID for CloudFront aliases
 
 # Outputs:
 #   ProdDataEndpoint:
 #     Description: 'API Prod stage endpoint'
-#     Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/'
+#     Value: !Sub 'https://${ServerlessApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/'
