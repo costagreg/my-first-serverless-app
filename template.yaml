@@ -80,6 +80,8 @@ Resources:
       Environment:
         Variables:
           AWS_REGION_NAME: !Ref RegionName
+          USER_POOL_ID: !Ref UserPool
+          USER_POOL_CLIENT_ID: !Ref UserPoolClient
       Events:
         RootEndPoint:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
@@ -119,6 +121,7 @@ Resources:
       UserPoolName: ApiUserPool
       # LambdaConfig:
       #   PreSignUp: !GetAtt PreSignupFunction.Arn
+      # 
       Policies:
         PasswordPolicy:
           MinimumLength: 6

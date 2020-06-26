@@ -16,6 +16,8 @@ export default (_, isLambda) => (req, res) => {
     apiUrl: isLambda ? lambdaApiUrl : process.env.API_DEV_URL ,
     isLambda: isLambda || false,
     isLambdaProd: isLambdaProd || false,
+    userPoolId: process.env.USER_POOL_ID,
+    userPoolClientId:  process.env.USER_POOL_CLIENT_ID,
   }
 
   const myApp = <App appConfig={appConfig} />

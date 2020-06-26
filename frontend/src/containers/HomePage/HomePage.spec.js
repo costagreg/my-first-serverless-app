@@ -16,7 +16,7 @@ describe('HomePage', () => {
   })
 
   describe('@renders', () => {
-    it('renders the Dashboard without any error', () => {
+    it('renders the <HomePage/> without any error', () => {
       const { asFragment } = render(<HomePage {...props} />)
 
       expect(asFragment()).toMatchSnapshot()
