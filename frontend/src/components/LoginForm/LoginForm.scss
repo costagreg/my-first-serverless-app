@@ -1,0 +1,32 @@
+.loginForm {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  margin: 0 auto;
+
+  &__formContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__email,
+  &__password {
+    margin: 0 0 10px 0;
+    border: 1px solid #cecece;
+    padding: 5px;
+
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+
+
+  }
+
+  &__loginButton,
+  &__signupButton {
+    flex: 1;
+    padding: 5px;
+  }
+}
