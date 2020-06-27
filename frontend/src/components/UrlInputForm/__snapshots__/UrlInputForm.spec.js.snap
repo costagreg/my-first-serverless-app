@@ -11,11 +11,12 @@ exports[`UrlInputForm @renders renders UrlInputForm without any error 1`] = `
       type="text"
       value=""
     />
-    <input
+    <button
       class="urlInputForm__submit"
       type="submit"
-      value="Cut me!"
-    />
+    >
+      Cut me!
+    </button>
   </form>
 </DocumentFragment>
 `;

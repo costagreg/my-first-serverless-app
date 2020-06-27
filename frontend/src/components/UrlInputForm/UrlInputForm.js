@@ -6,6 +6,7 @@ import useInput from '../../hooks/useInput'
 import './UrlInputForm.scss'
 
 export const URL_INPUT_PLACEHOLDER = 'https://www.example.com'
+export const SUBMIT_PLACEHOLDER = 'Cut me!'
 
 const UrlInputForm = (props) => {
   const { value, bindInput } = useInput('')
@@ -26,7 +27,9 @@ const UrlInputForm = (props) => {
         placeholder={URL_INPUT_PLACEHOLDER}
         {...bindInput}
       />
-      <input className="urlInputForm__submit" value="Cut me!" type="submit" />
+      <button type="submit" className="urlInputForm__submit">
+        {SUBMIT_PLACEHOLDER}
+      </button>
     </form>
   )
 }

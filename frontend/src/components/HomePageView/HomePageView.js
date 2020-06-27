@@ -13,8 +13,7 @@ const HomePageView = ({ createUrl, urlShortened, error }) => (
     </center>
     <UrlInputForm createUrl={createUrl} error={error} />
     <UrlShortenerOutput error={error} urlShortened={urlShortened} />
-    {urlShortened && <LoginForm />}
-    {/* <LoginForm/> */}
+    <LoginForm/>
   </div>
 )
 

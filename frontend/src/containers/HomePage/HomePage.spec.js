@@ -1,7 +1,7 @@
 import React from 'react'
 import HomePage from './HomePage'
 import { render, fireEvent, waitFor } from '@testing-library/react'
-import { URL_INPUT_PLACEHOLDER} from '../../components/UrlInputForm/UrlInputForm'
+import { URL_INPUT_PLACEHOLDER, SUBMIT_PLACEHOLDER} from '../../components/UrlInputForm/UrlInputForm'
 import mockAxios from 'axios'
 
 jest.mock('axios')
@@ -36,9 +36,9 @@ describe('HomePage', () => {
 
     describe('It is a valid URL', () => {
       it('should call the API to add the url', async () => {
-        const { getByPlaceholderText, getByText, getByRole } = render(<HomePage {...props} />)
+        const { getByPlaceholderText, getByRole, getByText } = render(<HomePage {...props} />)
         const urlInput = getByPlaceholderText(URL_INPUT_PLACEHOLDER)
-        const submitButton = getByRole('button')
+        const submitButton = getByRole('button', { name: SUBMIT_PLACEHOLDER })
 
         fireEvent.change(urlInput, {
           target: { value: 'http://www.example.com/' },
@@ -61,7 +61,7 @@ describe('HomePage', () => {
           const { getByPlaceholderText, getByRole, getByText } = render(<HomePage {...props} />)
 
           const urlInput = getByPlaceholderText(URL_INPUT_PLACEHOLDER)
-          const submitButton = getByRole('button')
+          const submitButton = getByRole('button', { name: SUBMIT_PLACEHOLDER })
 
           fireEvent.change(urlInput, {
             target: { value: 'www.example.com/' },
@@ -86,7 +86,7 @@ describe('HomePage', () => {
         const { getByPlaceholderText, getByRole, getByText } = render(<HomePage {...props} />)
 
         const urlInput = getByPlaceholderText(URL_INPUT_PLACEHOLDER)
-        const submitButton = getByRole('button')
+        const submitButton = getByRole('button', { name: SUBMIT_PLACEHOLDER })
 
         fireEvent.change(urlInput, {
           target: { value: 'example' },
@@ -113,7 +113,7 @@ describe('HomePage', () => {
         const { getByPlaceholderText, getByRole, getByText } = render(<HomePage {...props} />)
 
         const urlInput = getByPlaceholderText(URL_INPUT_PLACEHOLDER)
-        const submitButton = getByRole('button')
+        const submitButton = getByRole('button', { name: SUBMIT_PLACEHOLDER })
 
         fireEvent.change(urlInput, {
           target: { value: 'example.com' },

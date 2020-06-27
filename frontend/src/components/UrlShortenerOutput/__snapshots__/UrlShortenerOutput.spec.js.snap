@@ -7,6 +7,7 @@ exports[`UrlShortenerOutput @renders renders UrlShortenerOutput without any erro
   >
     <textarea
       class="urlShortenerOutput__link"
+      readonly=""
     />
   </div>
 </DocumentFragment>

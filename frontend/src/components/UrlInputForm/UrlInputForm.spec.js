@@ -1,5 +1,8 @@
 import React from 'react'
-import UrlInputForm, { URL_INPUT_PLACEHOLDER } from './UrlInputForm'
+import UrlInputForm, {
+  URL_INPUT_PLACEHOLDER,
+  SUBMIT_PLACEHOLDER,
+} from './UrlInputForm'
 import { render, fireEvent } from '@testing-library/react'
 
 describe('UrlInputForm', () => {
@@ -31,7 +34,7 @@ describe('UrlInputForm', () => {
       )
 
       const urlInput = getByPlaceholderText(URL_INPUT_PLACEHOLDER)
-      const submitButton = getByRole('button')
+      const submitButton = getByRole('button', { name: SUBMIT_PLACEHOLDER })
 
       fireEvent.change(urlInput, {
         target: { value: 'jshaksj' },

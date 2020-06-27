@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginForm @renders renders <LoginForm /> without any error 1`] = `
+<DocumentFragment>
+  <div
+    class="loginForm"
+  >
+    <form
+      class="loginForm__formContainer"
+    >
+      <p>
+        Signup to track your link!
+      </p>
+      <input
+        class="loginForm__email"
+        placeholder="Email"
+      />
+      <input
+        class="loginForm__password"
+        placeholder="Password"
+      />
+      <div
+        class="loginForm__buttons"
+      >
+        <button
+          class="loginForm__loginButton"
+        >
+          Login
+        </button>
+        <button
+          class="loginForm__signupButton"
+        >
+          Signup
+        </button>
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;

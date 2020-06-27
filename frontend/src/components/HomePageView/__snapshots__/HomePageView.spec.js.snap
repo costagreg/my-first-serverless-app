@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HomePage @renders renders the <HomePage/> without any error 1`] = `
+exports[`HomePageView @renders renders <HomePageView /> without any error 1`] = `
 <DocumentFragment>
   <div
     class="homePageView homePageView--initialState"
