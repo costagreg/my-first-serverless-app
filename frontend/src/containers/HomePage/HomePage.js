@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-import UrlInputForm from '../../components/UrlInputForm'
-import UrlShortenerOutput from '../../components/UrlShortenerOutput'
+import HomePageView from '../../components/HomePageView'
 import { isValidUrl, sanitiseUrl } from '../../helpers/urlHelpers'
 import axios from 'axios'
-
 
 const HomePage = ({ appConfig = {} }) => {
   const { apiUrl } = appConfig
@@ -11,7 +9,6 @@ const HomePage = ({ appConfig = {} }) => {
   const [urlShortened, setUrlShortened] = useState('')
 
   const createUrl = (url) => {
-
     if (isValidUrl(url)) {
       axios
         .post(`${apiUrl}/api/url`, {
@@ -33,14 +30,11 @@ const HomePage = ({ appConfig = {} }) => {
   }
 
   return (
-    <div>
-      <center>
-        <h2>URL Shortener!</h2>
-        <p>Simply copy & paste your link and click the cut button!</p>
-      </center>
-      <UrlInputForm createUrl={createUrl} error={error} />
-      <UrlShortenerOutput error={error} urlShortened={urlShortened} />
-    </div>
+    <HomePageView
+      createUrl={createUrl}
+      error={error}
+      urlShortened={urlShortened}
+    />
   )
 }
 
