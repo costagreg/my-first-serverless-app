@@ -1,16 +1,10 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import UrlInputForm from '../../components/UrlInputForm'
 import UrlShortenerOutput from '../../components/UrlShortenerOutput'
 import LoginForm from '../../components/LoginForm'
-import { shortUrl } from '../../actions/shortener'
 
 import './homePageView.scss'
-
-const mapToProps = (state) => ({
-  error: state.shortener.error,
-  urlShortened: state.shortener.urlShortened,
-})
 
 const HomePageView = ({ shortUrl, urlShortened, error }) => (
   <div className="homePageView homePageView--initialState">
@@ -24,6 +18,10 @@ const HomePageView = ({ shortUrl, urlShortened, error }) => (
   </div>
 )
 
-HomePageView.propTypes = {}
+HomePageView.propTypes = {
+  shortUrl: PropTypes.func,
+  error: PropTypes.string,
+  urlShortened: PropTypes.string,
+}
 
-export default connect(mapToProps, { shortUrl })(HomePageView)
+export default HomePageView

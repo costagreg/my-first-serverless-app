@@ -1,6 +1,6 @@
 const initialState = {
   error: '',
-  url: '',
+  urlShortened: '',
 }
 
 function shortenerReducer(state = initialState, action) {
