@@ -10,10 +10,10 @@ export const SUBMIT_PLACEHOLDER = 'Cut me!'
 
 const UrlInputForm = (props) => {
   const { value, bindInput } = useInput('')
-  const { createUrl, error } = props
+  const { shortUrl, error } = props
 
   const handleSubmit = (evt) => {
-    createUrl(value)
+    shortUrl(value)
     evt.preventDefault()
   }
 
@@ -35,7 +35,7 @@ const UrlInputForm = (props) => {
 }
 
 UrlInputForm.propTypes = {
-  createUrl: PropTypes.func.isRequired,
+  shortUrl: PropTypes.func.isRequired,
   error: PropTypes.string,
 }
 

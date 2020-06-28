@@ -1,5 +1,8 @@
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import rootReducer from '../reducers'
 import template from './template'
 import App from '../App'
 
@@ -13,15 +16,28 @@ export default (_, isLambda) => (req, res) => {
   const { lambdaApiUrl, isLambdaProd } = req
 
   const appConfig = {
-    apiUrl: isLambda ? lambdaApiUrl : process.env.API_DEV_URL ,
+    apiUrl: isLambda ? lambdaApiUrl : process.env.API_DEV_URL,
     isLambda: isLambda || false,
     isLambdaProd: isLambdaProd || false,
     userPoolId: process.env.USER_POOL_ID || process.env.USER_POOL_ID_DEV,
-    userPoolClientId:  process.env.USER_POOL_CLIENT_ID || process.env.USER_POOL_CLIENT_ID_DEV,
+    userPoolClientId:
+      process.env.USER_POOL_CLIENT_ID || process.env.USER_POOL_CLIENT_ID_DEV,
   }
 
-  const myApp = <App appConfig={appConfig} />
+  const store = createStore(rootReducer, {
+    appConfig,
+  })
+
+  const myApp = (
+    <Provider store={store}>
+      <App />{' '}
+    </Provider>
+  )
+
+  const preloadedState = store.getState()
+
+
   const markup = ReactDOMServer.renderToString(myApp)
 
-  return res.send(template({ markup, bundleUrl, styleUrl, appConfig }))
+  return res.send(template({ markup, bundleUrl, styleUrl, preloadedState }))
 }

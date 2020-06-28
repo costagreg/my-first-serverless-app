@@ -1,4 +1,4 @@
-export default ({markup, bundleUrl, styleUrl, appConfig}) => {
+export default ({markup, bundleUrl, styleUrl, preloadedState}) => {
   return `<!doctype html>
     <html>
       <head>
@@ -7,9 +7,7 @@ export default ({markup, bundleUrl, styleUrl, appConfig}) => {
       </head>
       <body >
         <div id="root">${markup}</div>
-        <script>
-          window.appConfig = '${JSON.stringify(appConfig)}'
-        </script>
+        <script>window.__PRELOADED_STATE__=${JSON.stringify(preloadedState)}</script>
         <script src="${bundleUrl}"></script>
        </body>
     </html>`
