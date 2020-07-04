@@ -5,12 +5,12 @@ exports[`LoginForm @renders renders <LoginForm /> without any error 1`] = `
   <div
     class="loginForm"
   >
+    <h3>
+      Login
+    </h3>
     <form
       class="loginForm__formContainer"
     >
-      <p>
-        Signup to track your link!
-      </p>
       <input
         class="loginForm__email"
         placeholder="Email"
@@ -18,19 +18,15 @@ exports[`LoginForm @renders renders <LoginForm /> without any error 1`] = `
       <input
         class="loginForm__password"
         placeholder="Password"
+        type="password"
       />
       <div
         class="loginForm__buttons"
       >
         <button
-          class="loginForm__loginButton"
+          class="loginForm__submit"
         >
           Login
-        </button>
-        <button
-          class="loginForm__signupButton"
-        >
-          Signup
         </button>
       </div>
     </form>

@@ -8,9 +8,10 @@ const SignupForm = (props) => (
     <h3>Signup</h3>
     <form className="signupForm__formContainer">
       <input className="signupForm__email" placeholder="Email" />
-      <input className="signupForm__password" placeholder="Password" />
+      <input type="password" className="signupForm__password" placeholder="Password" />
+      <input type="password" className="signupForm__password" placeholder="Confirm Password" />
       <div className="signupForm__buttons">
-        <button className="signupForm__loginButton">Login</button>
+        <button className="signupForm__submit">Sign up</button>
       </div>
     </form>
   </div>

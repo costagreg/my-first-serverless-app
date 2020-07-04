@@ -1,36 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Auth @renders renders the <Auth/> without any error 1`] = `
+exports[`SignupForm @renders renders <SignupForm /> without any error 1`] = `
 <DocumentFragment>
-  <div
-    class="loginForm"
-  >
-    <h3>
-      Login
-    </h3>
-    <form
-      class="loginForm__formContainer"
-    >
-      <input
-        class="loginForm__email"
-        placeholder="Email"
-      />
-      <input
-        class="loginForm__password"
-        placeholder="Password"
-        type="password"
-      />
-      <div
-        class="loginForm__buttons"
-      >
-        <button
-          class="loginForm__submit"
-        >
-          Login
-        </button>
-      </div>
-    </form>
-  </div>
   <div
     class="signupForm"
   >

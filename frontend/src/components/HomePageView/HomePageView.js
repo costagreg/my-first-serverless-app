@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import UrlInputForm from '../../components/UrlInputForm'
-import UrlShortenerOutput from '../../components/UrlShortenerOutput'
-import LoginForm from '../../components/LoginForm'
+import UrlInputForm from '../UrlInputForm'
+import UrlShortenerOutput from '../UrlShortenerOutput'
+import Auth from '../../containers/Auth'
 
 import './homePageView.scss'
 
@@ -14,7 +14,7 @@ const HomePageView = ({ shortUrl, urlShortened, error }) => (
     </center>
     <UrlInputForm shortUrl={shortUrl} error={error} />
     <UrlShortenerOutput error={error} urlShortened={urlShortened} />
-    <LoginForm />
+    <Auth />
   </div>
 )
 

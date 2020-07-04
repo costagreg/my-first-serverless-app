@@ -1,6 +1,6 @@
 import React from 'react'
 import HomePageView from './HomePageView'
-import { render } from '@testing-library/react'
+import { render } from '../../helpers/testUtils'
 
 describe('HomePageView', () => {
   describe('@renders', () => {

@@ -40,12 +40,12 @@ exports[`HomePage @renders renders the <HomePage/> without any error 1`] = `
     <div
       class="loginForm"
     >
+      <h3>
+        Login
+      </h3>
       <form
         class="loginForm__formContainer"
       >
-        <p>
-          Signup to track your link!
-        </p>
         <input
           class="loginForm__email"
           placeholder="Email"
@@ -53,19 +53,49 @@ exports[`HomePage @renders renders the <HomePage/> without any error 1`] = `
         <input
           class="loginForm__password"
           placeholder="Password"
+          type="password"
         />
         <div
           class="loginForm__buttons"
         >
           <button
-            class="loginForm__loginButton"
+            class="loginForm__submit"
           >
             Login
           </button>
+        </div>
+      </form>
+    </div>
+    <div
+      class="signupForm"
+    >
+      <h3>
+        Signup
+      </h3>
+      <form
+        class="signupForm__formContainer"
+      >
+        <input
+          class="signupForm__email"
+          placeholder="Email"
+        />
+        <input
+          class="signupForm__password"
+          placeholder="Password"
+          type="password"
+        />
+        <input
+          class="signupForm__password"
+          placeholder="Confirm Password"
+          type="password"
+        />
+        <div
+          class="signupForm__buttons"
+        >
           <button
-            class="loginForm__signupButton"
+            class="signupForm__submit"
           >
-            Signup
+            Sign up
           </button>
         </div>
       </form>

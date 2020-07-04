@@ -2,17 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import LoginForm from '../../components/LoginForm'
+import SignupForm from '../../components/SignupForm'
 
-const mapToProps = (state) => ({
-
-})
+const mapToProps = (state) => ({})
 
 export const Auth = (props) => (
-  <LoginForm />
+  <>
+    <LoginForm />
+    <SignupForm />
+  </>
 )
 
-Auth.propTypes = {
+Auth.propTypes = {}
 
-}
-
-export default connect(mapToProps, {  })(Auth)
+export default connect(mapToProps, {})(Auth)
