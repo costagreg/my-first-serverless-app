@@ -4,8 +4,9 @@ import axios from 'axios'
 export const shortUrl = (url) => (dispatch, getState) => {
   const state = getState()
   const { apiUrl } = state.appConfig
+
   if (isValidUrl(url)) {
-    axios
+    return axios
       .post(`${apiUrl}/api/url`, {
         url: sanitiseUrl(url),
       })

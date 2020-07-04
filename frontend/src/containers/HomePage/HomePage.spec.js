@@ -55,30 +55,6 @@ describe('HomePage', () => {
 
         await waitFor(() => getByText('http://api.test.com/xysuk'))
       })
-
-      describe('Does not contain a protocol', () => {
-        it('adds https', async () => {
-          const { getByPlaceholderText, getByRole, getByText } = render(<HomePage {...props} />)
-
-          const urlInput = getByPlaceholderText(URL_INPUT_PLACEHOLDER)
-          const submitButton = getByRole('button', { name: SUBMIT_PLACEHOLDER })
-
-          fireEvent.change(urlInput, {
-            target: { value: 'www.example.com/' },
-          })
-
-          fireEvent.click(submitButton)
-
-          expect(mockAxios.post).toHaveBeenCalledWith(
-            'http://api.test.com/api/url',
-            {
-              url: 'https://www.example.com/',
-            }
-          )
-
-          await waitFor(() => getByText('http://api.test.com/xysuk'))
-        })
-      })
     })
 
     describe('It is not a valid URL', () => {
