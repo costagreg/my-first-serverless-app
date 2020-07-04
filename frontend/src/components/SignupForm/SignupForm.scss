@@ -1,4 +1,4 @@
-.loginForm {
+.signupForm {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -25,9 +25,12 @@
   &__buttons {
     display: flex;
     flex-direction: row;
+
+
   }
 
-  &__submitButton{
+  &__loginButton,
+  &__signupButton {
     flex: 1;
     padding: 5px;
   }
