@@ -1,6 +1,6 @@
 import React from 'react'
 import HomePage from './HomePage'
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { render, fireEvent, waitFor } from '../../helpers/testUtils'
 import { URL_INPUT_PLACEHOLDER, SUBMIT_PLACEHOLDER} from '../../components/UrlInputForm/UrlInputForm'
 import mockAxios from 'axios'
 

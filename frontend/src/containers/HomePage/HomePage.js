@@ -9,7 +9,7 @@ const mapToProps = (state) => ({
   urlShortened: state.shortener.urlShortened,
 })
 
-const HomePage = ({ shortUrl, error, urlShortened }) => (
+export const HomePage = ({ shortUrl, error, urlShortened }) => (
   <HomePageView error={error} shortUrl={shortUrl} urlShortened={urlShortened} />
 )
 

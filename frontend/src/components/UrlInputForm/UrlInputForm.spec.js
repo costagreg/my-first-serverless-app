@@ -28,9 +28,9 @@ describe('UrlInputForm', () => {
 
   describe('@submit', () => {
     it('should call createUrl prop', () => {
-      const createUrl = jest.fn(() => {})
+      const shortUrl = jest.fn(() => {})
       const { getByPlaceholderText, getByRole } = render(
-        <UrlInputForm createUrl={createUrl} />
+        <UrlInputForm shortUrl={shortUrl} />
       )
 
       const urlInput = getByPlaceholderText(URL_INPUT_PLACEHOLDER)
@@ -42,7 +42,7 @@ describe('UrlInputForm', () => {
 
       fireEvent.click(submitButton)
 
-      expect(createUrl).toHaveBeenCalledTimes(1)
+      expect(shortUrl).toHaveBeenCalledTimes(1)
     })
   })
 })
