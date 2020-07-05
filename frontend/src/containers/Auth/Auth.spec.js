@@ -16,6 +16,11 @@ describe('Auth', () => {
   })
 
   describe('SignUp', () => {
+    describe('password does not match', () => {
+      const { render, getByPlaceholderText } = render(<Auth />)
 
+      getByPlaceholderText('')
+      
+    })
   })
 })

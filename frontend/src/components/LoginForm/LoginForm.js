@@ -5,7 +5,6 @@ import './LoginForm.scss'
 
 const LoginForm = (props) => (
   <div className="loginForm">
-    <h3>Login</h3>
     <form className="loginForm__formContainer">
       <input type="email" className="loginForm__email" placeholder="Email" />
       <input

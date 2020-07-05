@@ -15,41 +15,40 @@ const SignupForm = ({ signup, error }) => {
     if (passwordValue === confirmPasswordValue) {
       signup(emailValue, passwordValue)
     } else {
-      signupError('Password doesn\'t match')
+      signupError("Password doesn't match")
     }
     evt.preventDefault()
   }
 
   return (
     <div className="signupForm">
-      <h3>Signup</h3>
-      <form className="signupForm__formContainer" onSubmit={handleSubmit}>
-        <input
-          className="signupForm__email"
-          placeholder="Email"
-          type="email"
-          {...emailBindInput}
-          required
-        />
-        <input
-          type="password"
-          className="signupForm__password"
-          placeholder="Password"
-          {...passwordBindInput}
-          required
-        />
-        <input
-          type="password"
-          className="signupForm__password"
-          placeholder="Confirm Password"
-          {...confirmPasswordBindInput}
-          required
-        />
-        <div className="signupForm__buttons">
-          <button className="signupForm__submit">Sign up</button>
-        </div>
-        {error}
-      </form>
+        <form className="signupForm__formContainer" onSubmit={handleSubmit}>
+          <input
+            className="signupForm__email"
+            placeholder="Email"
+            type="email"
+            {...emailBindInput}
+            required
+          />
+          <input
+            type="password"
+            className="signupForm__password"
+            placeholder="Password"
+            {...passwordBindInput}
+            required
+          />
+          <input
+            type="password"
+            className="signupForm__password"
+            placeholder="Confirm Password"
+            {...confirmPasswordBindInput}
+            required
+          />
+          <div className="signupForm__buttons">
+            <button className="signupForm__submit">Sign up</button>
+          </div>
+          {error}
+        </form>
     </div>
   )
 }

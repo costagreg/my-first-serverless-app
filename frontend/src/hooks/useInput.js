@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState } from "react"
 
 export default (name='', initialValue = '') => {
-  const [value, setValue] = useState(initialValue);
+  const [value, setValue] = useState(initialValue)
 
   return {
     [`${name}Value`]: value,
@@ -10,8 +10,8 @@ export default (name='', initialValue = '') => {
     [`${name}BindInput`]: {
       value,
       onChange: event => {
-        setValue(event.target.value);
+        setValue(event.target.value)
       }
     }
-  };
-};
+  }
+}

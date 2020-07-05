@@ -1,0 +1,12 @@
+.authButtons {
+  display: flex;
+  justify-content: center;
+  &__login, &__signup{
+    width: 100px;
+    height: 100px;
+    background: white;
+    border: 1px solid #cecece;
+    border-radius: 10px;
+    margin: 0 5px;
+  }
+}
