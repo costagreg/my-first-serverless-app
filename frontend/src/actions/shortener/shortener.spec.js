@@ -21,13 +21,11 @@ describe('shortener', () => {
   })
   describe('shortUrl', () => {
     beforeEach(() => {
-      mockAxios.post.mockImplementation(() =>
-        Promise.resolve({
-          data: {
-            result: { id: 'mockid' },
-          },
-        })
-      )
+      mockAxios.post = jest.fn().mockResolvedValue({
+        data: {
+          result: { id: 'mockid' },
+        },
+      })
     })
 
     describe('It is a valid URL', () => {
@@ -87,11 +85,9 @@ describe('shortener', () => {
 
     describe('Something went wrong on the call', () => {
       beforeEach(() => {
-        mockAxios.post.mockImplementation(() =>
-          Promise.reject({
-            error: 'Something really wrong :)',
-          })
-        )
+        mockAxios.post = jest.fn().mockRejectedValue({
+          error: 'Something really wrong :)',
+        })
       })
 
       it('should show an error', async () => {

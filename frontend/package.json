@@ -24,7 +24,8 @@
   "scripts": {
     "dev": "PORT=8080 NODE_ENV=development node src/server/dev",
     "lambda:dev": "webpack --config webpack.lambda.config.js --mode production",
-    "jest": "jest"
+    "jest": "jest",
+    "jest:watch": "jest --watch"
   },
   "devDependencies": {
     "@babel/core": "^7.10.1",

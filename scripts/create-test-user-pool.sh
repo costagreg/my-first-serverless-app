@@ -5,4 +5,4 @@
 
 # To get dynamically user-pool-id
 
-# aws cognito-idp create-user-pool-client --user-pool-id us-east-1_v3i7bK6rM --client-name LocalDevTest --generate-secret
+# aws cognito-idp create-user-pool-client --user-pool-id us-east-1_dHAggSGT3 --client-name LocalDevTest
