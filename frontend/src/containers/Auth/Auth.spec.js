@@ -17,10 +17,27 @@ describe('Auth', () => {
 
   describe('SignUp', () => {
     describe('password does not match', () => {
-      const { render, getByPlaceholderText } = render(<Auth />)
+      it('redenders an error message', () => {
+        const { getByRole, getByPlaceholderText, getByText } = render(<Auth />)
 
-      getByPlaceholderText('')
-      
+        const signupButton = getByRole('button', { name: 'Signup' })
+
+        fireEvent.click(signupButton)
+
+        const emailInput = getByPlaceholderText('Email')
+        const passwordInput = getByPlaceholderText('Password')
+        const confirmPasswordInput = getByPlaceholderText('Confirm Password')
+        const submitButton = getByRole('button', { name: 'Sign up' })
+ 
+
+        fireEvent.change(emailInput, { target: { value: 'test@gmail.com' } })
+        fireEvent.change(passwordInput, { target: { value: 'password123*' } })
+        fireEvent.change(confirmPasswordInput, { target: { value: 'password3*' } })
+
+        fireEvent.click(submitButton)
+
+        getByText('Password doesn\'t match')
+      })
     })
   })
 })

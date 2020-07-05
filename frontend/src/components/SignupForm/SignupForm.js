@@ -4,7 +4,7 @@ import useInput from '../../hooks/useInput'
 
 import './SignupForm.scss'
 
-const SignupForm = ({ signup, error }) => {
+const SignupForm = ({ signup, signupError, error }) => {
   const { emailValue, emailBindInput } = useInput('email')
   const { passwordValue, passwordBindInput } = useInput('password')
   const { confirmPasswordValue, confirmPasswordBindInput } = useInput(

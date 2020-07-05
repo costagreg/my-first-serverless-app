@@ -10,7 +10,7 @@ const mapToProps = (state) => ({
   error: state.signup.error,
 })
 
-export const Auth = ({ signup, error }) => {
+export const Auth = ({ signup, signupError, error }) => {
   const [showLogin, setShowLogin] = useState(true)
 
   return (
