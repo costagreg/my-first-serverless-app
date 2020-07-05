@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-export default initialValue => {
+export default (name='', initialValue = '') => {
   const [value, setValue] = useState(initialValue);
 
   return {
-    value,
+    [`${name}Value`]: value,
     setValue,
     reset: () => setValue(""),
-    bindInput: {
+    [`${name}BindInput`]: {
       value,
       onChange: event => {
         setValue(event.target.value);

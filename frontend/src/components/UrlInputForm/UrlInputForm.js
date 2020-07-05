@@ -9,11 +9,11 @@ export const URL_INPUT_PLACEHOLDER = 'https://www.example.com'
 export const SUBMIT_PLACEHOLDER = 'Cut me!'
 
 const UrlInputForm = (props) => {
-  const { value, bindInput } = useInput('')
+  const { urlValue, urlBindInput } = useInput('url')
   const { shortUrl, error } = props
 
   const handleSubmit = (evt) => {
-    shortUrl(value)
+    shortUrl(urlValue)
     evt.preventDefault()
   }
 
@@ -25,7 +25,7 @@ const UrlInputForm = (props) => {
         })}
         type="text"
         placeholder={URL_INPUT_PLACEHOLDER}
-        {...bindInput}
+        {...urlBindInput}
       />
       <button type="submit" className="urlInputForm__submit">
         {SUBMIT_PLACEHOLDER}

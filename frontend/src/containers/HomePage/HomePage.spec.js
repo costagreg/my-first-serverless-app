@@ -1,7 +1,10 @@
 import React from 'react'
 import HomePage from './HomePage'
 import { render, fireEvent, waitFor } from '../../helpers/testUtils'
-import { URL_INPUT_PLACEHOLDER, SUBMIT_PLACEHOLDER} from '../../components/UrlInputForm/UrlInputForm'
+import {
+  URL_INPUT_PLACEHOLDER,
+  SUBMIT_PLACEHOLDER,
+} from '../../components/UrlInputForm/UrlInputForm'
 import mockAxios from 'axios'
 
 jest.mock('axios')
@@ -25,18 +28,18 @@ describe('HomePage', () => {
 
   describe('@submit', () => {
     beforeEach(() => {
-      mockAxios.post.mockImplementation(() =>
-        Promise.resolve({
-          data: {
-            result: { id: 'xysuk' },
-          },
-        })
-      )
+      mockAxios.post = jest.fn().mockResolvedValue({
+        data: {
+          result: { id: 'xysuk' },
+        },
+      })
     })
 
     describe('It is a valid URL', () => {
       it('should call the API to add the url', async () => {
-        const { getByPlaceholderText, getByRole, getByText } = render(<HomePage {...props} />)
+        const { getByPlaceholderText, getByRole, getByText } = render(
+          <HomePage {...props} />
+        )
         const urlInput = getByPlaceholderText(URL_INPUT_PLACEHOLDER)
         const submitButton = getByRole('button', { name: SUBMIT_PLACEHOLDER })
 
@@ -59,7 +62,9 @@ describe('HomePage', () => {
 
     describe('It is not a valid URL', () => {
       it('should not call the API and should show an alert', async () => {
-        const { getByPlaceholderText, getByRole, getByText } = render(<HomePage {...props} />)
+        const { getByPlaceholderText, getByRole, getByText } = render(
+          <HomePage {...props} />
+        )
 
         const urlInput = getByPlaceholderText(URL_INPUT_PLACEHOLDER)
         const submitButton = getByRole('button', { name: SUBMIT_PLACEHOLDER })
@@ -78,15 +83,15 @@ describe('HomePage', () => {
 
     describe('Something went wrong on the call', () => {
       beforeEach(() => {
-        mockAxios.post.mockImplementation(() =>
-          Promise.reject({
-            error: 'Something really wrong :)',
-          })
-        )
+        mockAxios.post = jest.fn().mockRejectedValue({
+          error: 'Something really wrong :)',
+        })
       })
 
       it('should show an error', async () => {
-        const { getByPlaceholderText, getByRole, getByText } = render(<HomePage {...props} />)
+        const { getByPlaceholderText, getByRole, getByText } = render(
+          <HomePage {...props} />
+        )
 
         const urlInput = getByPlaceholderText(URL_INPUT_PLACEHOLDER)
         const submitButton = getByRole('button', { name: SUBMIT_PLACEHOLDER })

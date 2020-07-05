@@ -43,15 +43,19 @@ exports[`Auth @renders renders the <Auth/> without any error 1`] = `
       <input
         class="signupForm__email"
         placeholder="Email"
+        required=""
+        value=""
       />
       <input
         class="signupForm__password"
         placeholder="Password"
+        required=""
         type="password"
       />
       <input
         class="signupForm__password"
         placeholder="Confirm Password"
+        required=""
         type="password"
       />
       <div
