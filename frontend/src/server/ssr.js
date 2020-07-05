@@ -36,7 +36,6 @@ export default (_, isLambda) => (req, res) => {
 
   const preloadedState = store.getState()
 
-
   const markup = ReactDOMServer.renderToString(myApp)
 
   return res.send(template({ markup, bundleUrl, styleUrl, preloadedState }))

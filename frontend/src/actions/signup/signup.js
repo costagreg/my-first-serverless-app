@@ -3,6 +3,13 @@ import {
   CognitoUserAttribute,
 } from 'amazon-cognito-identity-js'
 
+export const signupError = (error) => (dispatch, getState) => {
+  dispatch({
+    type: 'SET_SIGNUP_ERROR',
+    error,
+  })
+}
+
 export const signup = (email, password) => (dispatch, getState) => {
   const state = getState()
 
@@ -20,13 +27,10 @@ export const signup = (email, password) => (dispatch, getState) => {
 
   return userPool.signUp(email, password, user, null, (error, result) => {
     if (error) {
-      dispatch({
-        type: 'SIGNUP_ERROR',
-        error: error.message || JSON.stringify(error),
-      })
+      dispatch(signupError(error.message || JSON.stringify(error)))
     } else {
       dispatch({
-        type: 'SIGNUP_SUCCESS',
+        type: 'SET_SIGNUP_SUCCESS',
         user: result.user.getUsername(),
       })
     }

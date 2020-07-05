@@ -15,6 +15,7 @@ exports[`SignupForm @renders renders <SignupForm /> without any error 1`] = `
         class="signupForm__email"
         placeholder="Email"
         required=""
+        type="email"
         value=""
       />
       <input
@@ -22,6 +23,7 @@ exports[`SignupForm @renders renders <SignupForm /> without any error 1`] = `
         placeholder="Password"
         required=""
         type="password"
+        value=""
       />
       <input
         class="signupForm__password"

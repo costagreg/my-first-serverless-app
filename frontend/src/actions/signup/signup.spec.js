@@ -1,7 +1,7 @@
 import configureStore from 'redux-mock-store'
 import { CognitoUserPool } from 'amazon-cognito-identity-js'
 import thunk from 'redux-thunk'
-import { signup } from '../signup'
+import { signup, signupError } from '../signup'
 
 const middlewares = [thunk] // add your middlewares like `redux-thunk`
 const mockStore = configureStore(middlewares)
@@ -25,9 +25,29 @@ describe('signup', () => {
     CognitoUserPool.returnError = ''
     jest.clearAllMocks()
   })
+
+  describe('signupValidationError', () => {
+    it('dispatchs SET_SIGNUP_ERROR', () => {
+      const store = mockStore({
+        appConfig: {
+          userPoolId: 'userPoolId',
+          userPoolClientId: 'userPoolClientId',
+        },
+      })
+      store.dispatch(signupError('Password does not match'))
+
+      const actions = store.getActions()
+
+      expect(actions[0]).toEqual({
+        type: 'SET_SIGNUP_ERROR',
+        error: 'Password does not match',
+      })
+    })
+  })
+
   describe('signup', () => {
     describe('cognit returns success', () => {
-      it('dispatchs SIGNUP_SUCCESS', () => {
+      it('dispatchs SET_SIGNUP_SUCCESS', () => {
         const store = mockStore({
           appConfig: {
             userPoolId: 'userPoolId',
@@ -56,7 +76,7 @@ describe('signup', () => {
         )
 
         expect(actions[0]).toEqual({
-          type: 'SIGNUP_SUCCESS',
+          type: 'SET_SIGNUP_SUCCESS',
           user: 'cognitousername',
         })
       })
@@ -73,7 +93,7 @@ describe('signup', () => {
         })
       })
 
-      it('dispatchs SIGNUP_ERROR', () => {
+      it('dispatchs SET_SIGNUP_ERROR', () => {
         const store = mockStore({
           appConfig: {
             userPoolId: 'userPoolId',
@@ -102,7 +122,7 @@ describe('signup', () => {
         )
 
         expect(actions[0]).toEqual({
-          type: 'SIGNUP_ERROR',
+          type: 'SET_SIGNUP_ERROR',
           error: 'test error',
         })
       })

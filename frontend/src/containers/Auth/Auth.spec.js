@@ -14,4 +14,8 @@ describe('Auth', () => {
       expect(asFragment()).toMatchSnapshot()
     })
   })
+
+  describe('SignUp', () => {
+
+  })
 })

@@ -14,6 +14,7 @@ exports[`LoginForm @renders renders <LoginForm /> without any error 1`] = `
       <input
         class="loginForm__email"
         placeholder="Email"
+        type="email"
       />
       <input
         class="loginForm__password"

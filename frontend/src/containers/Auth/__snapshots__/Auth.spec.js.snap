@@ -14,6 +14,7 @@ exports[`Auth @renders renders the <Auth/> without any error 1`] = `
       <input
         class="loginForm__email"
         placeholder="Email"
+        type="email"
       />
       <input
         class="loginForm__password"
@@ -44,6 +45,7 @@ exports[`Auth @renders renders the <Auth/> without any error 1`] = `
         class="signupForm__email"
         placeholder="Email"
         required=""
+        type="email"
         value=""
       />
       <input
@@ -51,6 +53,7 @@ exports[`Auth @renders renders the <Auth/> without any error 1`] = `
         placeholder="Password"
         required=""
         type="password"
+        value=""
       />
       <input
         class="signupForm__password"
