@@ -8,7 +8,7 @@ const SignupForm = ({ signup, signupError, error }) => {
   const { emailValue, emailBindInput } = useInput('email')
   const { passwordValue, passwordBindInput } = useInput('password')
   const { confirmPasswordValue, confirmPasswordBindInput } = useInput(
-    'password'
+    'confirmPassword'
   )
 
   const handleSubmit = (evt) => {

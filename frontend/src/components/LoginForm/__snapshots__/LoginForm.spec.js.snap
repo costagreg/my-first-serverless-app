@@ -5,9 +5,6 @@ exports[`LoginForm @renders renders <LoginForm /> without any error 1`] = `
   <div
     class="loginForm"
   >
-    <h3>
-      Login
-    </h3>
     <form
       class="loginForm__formContainer"
     >

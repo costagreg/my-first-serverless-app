@@ -5,9 +5,6 @@ exports[`SignupForm @renders renders <SignupForm /> without any error 1`] = `
   <div
     class="signupForm"
   >
-    <h3>
-      Signup
-    </h3>
     <form
       class="signupForm__formContainer"
     >
@@ -30,6 +27,7 @@ exports[`SignupForm @renders renders <SignupForm /> without any error 1`] = `
         placeholder="Confirm Password"
         required=""
         type="password"
+        value=""
       />
       <div
         class="signupForm__buttons"

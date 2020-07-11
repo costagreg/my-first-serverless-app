@@ -38,11 +38,22 @@ exports[`HomePage @renders renders the <HomePage/> without any error 1`] = `
       />
     </div>
     <div
+      class="authButtons"
+    >
+      <button
+        class="authButtons__login"
+      >
+        Login
+      </button>
+      <button
+        class="authButtons__signup"
+      >
+        Signup
+      </button>
+    </div>
+    <div
       class="loginForm"
     >
-      <h3>
-        Login
-      </h3>
       <form
         class="loginForm__formContainer"
       >
@@ -63,46 +74,6 @@ exports[`HomePage @renders renders the <HomePage/> without any error 1`] = `
             class="loginForm__submit"
           >
             Login
-          </button>
-        </div>
-      </form>
-    </div>
-    <div
-      class="signupForm"
-    >
-      <h3>
-        Signup
-      </h3>
-      <form
-        class="signupForm__formContainer"
-      >
-        <input
-          class="signupForm__email"
-          placeholder="Email"
-          required=""
-          type="email"
-          value=""
-        />
-        <input
-          class="signupForm__password"
-          placeholder="Password"
-          required=""
-          type="password"
-          value=""
-        />
-        <input
-          class="signupForm__password"
-          placeholder="Confirm Password"
-          required=""
-          type="password"
-        />
-        <div
-          class="signupForm__buttons"
-        >
-          <button
-            class="signupForm__submit"
-          >
-            Sign up
           </button>
         </div>
       </form>
