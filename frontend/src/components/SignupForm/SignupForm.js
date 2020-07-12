@@ -22,37 +22,41 @@ const SignupForm = ({ signup, signupError, error }) => {
 
   return (
     <div className="signupForm">
-        <form className="signupForm__formContainer" onSubmit={handleSubmit}>
-          <input
-            className="signupForm__email"
-            placeholder="Email"
-            type="email"
-            {...emailBindInput}
-            required
-          />
-          <input
-            type="password"
-            className="signupForm__password"
-            placeholder="Password"
-            {...passwordBindInput}
-            required
-          />
-          <input
-            type="password"
-            className="signupForm__password"
-            placeholder="Confirm Password"
-            {...confirmPasswordBindInput}
-            required
-          />
-          <div className="signupForm__buttons">
-            <button className="signupForm__submit">Sign up</button>
-          </div>
-          {error}
-        </form>
+      <form className="signupForm__formContainer" onSubmit={handleSubmit}>
+        <input
+          className="signupForm__email"
+          placeholder="Email"
+          type="email"
+          {...emailBindInput}
+          required
+        />
+        <input
+          type="password"
+          className="signupForm__password"
+          placeholder="Password"
+          {...passwordBindInput}
+          required
+        />
+        <input
+          type="password"
+          className="signupForm__password"
+          placeholder="Confirm Password"
+          {...confirmPasswordBindInput}
+          required
+        />
+        <div className="signupForm__buttons">
+          <button className="signupForm__submit">Sign up</button>
+        </div>
+        {error}
+      </form>
     </div>
   )
 }
 
-SignupForm.propTypes = {}
+SignupForm.propTypes = {
+  signup: PropTypes.func,
+  signupError: PropTypes.func,
+  error: PropTypes.string,
+}
 
 export default SignupForm

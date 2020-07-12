@@ -1,5 +1,6 @@
 const initialState = {
   error: '',
+  user: '',
 }
 
 function signupReducer(state = initialState, action) {
