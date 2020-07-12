@@ -5,8 +5,13 @@
     width: 100px;
     height: 100px;
     background: white;
-    border: 1px solid #cecece;
+    border: 1px solid #0D1B2A;
     border-radius: 10px;
     margin: 0 5px;
+
+    &--active{
+      color: white,;
+      background: #0D1B2A;
+    }
   }
 }

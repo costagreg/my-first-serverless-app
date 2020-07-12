@@ -1,21 +1,32 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 import './AuthButtons.scss'
 
-const AuthButtons = ({ setShowLogin }) => (
+const AuthButtons = ({ isLogin, setIsLogin }) => (
   <div className="authButtons">
-    <button className="authButtons__login" onClick={() => setShowLogin(true)}>
+    <button
+      className={classNames('authButtons__login', {
+        'authButtons__login--active': isLogin,
+      })}
+      onClick={() => setIsLogin(true)}
+    >
       Login
     </button>
-    <button className="authButtons__signup" onClick={() => setShowLogin(false)}>
+    <button
+      className={classNames('authButtons__signup', {
+        'authButtons__signup--active': !isLogin,
+      })}
+      onClick={() => setIsLogin(false)}
+    >
       Signup
     </button>
   </div>
 )
 
 AuthButtons.propTypes = {
-  setShowLogin: PropTypes.func,
+  setIsLogin: PropTypes.func,
 }
 
 export default AuthButtons

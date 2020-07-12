@@ -13,7 +13,7 @@ const mapToProps = (state) => ({
 })
 
 export const Auth = ({ login, signup, signupError,getCurrentUser, error }) => {
-  const [showLogin, setShowLogin] = useState(true)
+  const [isLogin, setIsLogin] = useState(true)
 
   useEffect(() => {
     getCurrentUser()
@@ -21,8 +21,8 @@ export const Auth = ({ login, signup, signupError,getCurrentUser, error }) => {
 
   return (
     <>
-      <AuthButtons setShowLogin={setShowLogin} />
-      {showLogin ? (
+      <AuthButtons isLogin={isLogin} setIsLogin={setIsLogin} />
+      {isLogin ? (
         <LoginForm login={login} />
       ) : (
         <SignupForm signup={signup} signupError={signupError} error={error} />

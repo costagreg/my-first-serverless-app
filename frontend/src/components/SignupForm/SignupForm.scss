@@ -4,6 +4,7 @@
   flex-direction: column;
   padding: 10px;
   margin: 0 auto;
+  width: 210px;
 
   h3{
     text-align: center;
@@ -17,9 +18,9 @@
   &__email,
   &__password {
     margin: 0 0 10px 0;
-    border: 1px solid #cecece;
+    border: 1px solid #0D1B2A;
     padding: 5px;
-
+    border-radius: 5px;
   }
 
   &__buttons {
@@ -31,6 +32,7 @@
 
   &__submit {
     flex: 1;
+    border: 1px solid #0D1B2A;
     padding: 5px;
   }
 }
