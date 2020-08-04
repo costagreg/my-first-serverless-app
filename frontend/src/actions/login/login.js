@@ -26,13 +26,12 @@ export const login = (email, password) => (dispatch, getState) => {
     Pool: userPool,
   }
 
-	const cognitoUser = new CognitoUser(userData)
-	
-  cognitoUser.authenticateUser(authenticationDetails, {
+  const cognitoUser = new CognitoUser(userData)
 
+  cognitoUser.authenticateUser(authenticationDetails, {
     onSuccess: function (result) {
-			//POTENTIAL: Region needs to be set if not already set previously elsewhere.
-			const accessToken = result.getAccessToken().getJwtToken()
+      //POTENTIAL: Region needs to be set if not already set previously elsewhere.
+      const accessToken = result.getAccessToken().getJwtToken()
 
       AWS.config.region = 'us-east-1'
 
@@ -44,8 +43,8 @@ export const login = (email, password) => (dispatch, getState) => {
             .getIdToken()
             .getJwtToken(),
         },
-			})
-			
+      })
+
       //refreshes credentials using AWS.CognitoIdentity.getCredentialsForIdentity()
       AWS.config.credentials.refresh((error) => {
         if (error) {
@@ -56,43 +55,51 @@ export const login = (email, password) => (dispatch, getState) => {
           console.log('Successfully logged!')
         }
       })
-		},
-		onFailure: function(err) {
-			alert(err.message || JSON.stringify(err))
-		},
+    },
+    onFailure: function (err) {
+      alert(err.message || JSON.stringify(err))
+    },
   })
 }
 
 export const getCurrentUser = () => (dispatch, getState) => {
-	const state = getState()
+  const state = getState()
 
-	const poolData = {
+  const poolData = {
     UserPoolId: state.appConfig.userPoolId,
     ClientId: state.appConfig.userPoolClientId,
-	}
+  }
 
-	const userPool = new CognitoUserPool(poolData)
+  const userPool = new CognitoUserPool(poolData)
 
-	const cognitoUser = userPool.getCurrentUser()
-	
-	if (cognitoUser != null) {
-		cognitoUser.getSession(function(err, session) {
-			if (err) {
-				alert(err.message || JSON.stringify(err))
-				return
-			}
-			console.log('session validity: ' + session.isValid())
-	
-			// NOTE: getSession must be called to authenticate user before calling getUserAttributes
-			cognitoUser.getUserAttributes(function(err, attributes) {
-				if (err) {
-					// Handle error
-				} else {
-					// Do something with attributes
-					console.log(attributes)
-				}
-			})
-	
+  const cognitoUser = userPool.getCurrentUser()
+
+  if (cognitoUser != null) {
+    cognitoUser.getSession(function (err, session) {
+      if (err) {
+        alert(err.message || JSON.stringify(err))
+        return
+      }
+      // console.log('session validity: ' + session.isValid())
+
+      // NOTE: getSession must be called to authenticate user before calling getUserAttributes
+      // cognitoUser.getUserAttributes(function(err, attributes) {
+      // 	if (err) {
+      // 		// Handle error
+      // 	} else {
+      // 		// Do something with attributes
+      // 		console.log(attributes)
+      // 	}
+      // })
+
+      cognitoUser.getUserData(function (err, { Username }) {
+        if (err) {
+          alert(err.message || JSON.stringify(err))
+          return
+        }
+        dispatch({ type: 'SET_USER', user: Username })
+      })
+
       AWS.config.credentials = new AWS.CognitoIdentityCredentials({
         IdentityPoolId: 'us-east-1:6448bef8-9f84-4a64-a22b-d28aba49998f', // your identity pool id here
         Logins: {
@@ -101,10 +108,10 @@ export const getCurrentUser = () => (dispatch, getState) => {
             .getIdToken()
             .getJwtToken(),
         },
-			})
-	
-			// Instantiate aws sdk service objects now that the credentials have been updated.
-			// example: var s3 = new AWS.S3()
-		})
-	}
+      })
+
+      // Instantiate aws sdk service objects now that the credentials have been updated.
+      // example: var s3 = new AWS.S3()
+    })
+  }
 }

@@ -2,6 +2,7 @@
 # aws cognito-idp list-user-pools --max-results 10
 
 # TO-DO: Add varification email
+# TO-DO: Attach presigned trigger lambda function
 # aws cognito-idp create-user-pool --pool-name LocalDevTest --schema Name=email,Required=true 
 
 # To get dynamically user-pool-id
