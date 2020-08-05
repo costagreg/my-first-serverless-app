@@ -45,7 +45,7 @@ const SignupForm = ({ signup, signupError, error }) => {
           required
         />
         <div className="signupForm__buttons">
-          <button className="signupForm__submit">Sign up</button>
+          <button type="submit" className="signupForm__submit">Sign up</button>
         </div>
         {error}
       </form>

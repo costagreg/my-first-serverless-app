@@ -12,18 +12,22 @@ const mapToProps = (state) => ({
   error: state.signup.error,
 })
 
-const AuthSignupLogin = ({isLogin, setIsLogin}) => <>
-  <AuthButtons isLogin={isLogin} setIsLogin={setIsLogin} />
-  {isLogin ? (
-    <LoginForm login={login} />
-  ) : (
-    <SignupForm
-      signup={signup}
-      signupError={signupError}
-      error={error}
-    />
-  )}
-</>
+const AuthSignupLogin = ({
+  error,
+  isLogin,
+  setIsLogin,
+  signup,
+  signupError,
+}) => (
+  <>
+    <AuthButtons isLogin={isLogin} setIsLogin={setIsLogin} />
+    {isLogin ? (
+      <LoginForm login={login} />
+    ) : (
+      <SignupForm signup={signup} signupError={signupError} error={error} />
+    )}
+  </>
+)
 
 export const Auth = ({
   user,
@@ -42,11 +46,16 @@ export const Auth = ({
   return (
     <>
       {user ? (
-        <>
-          Welcome back ${user}
-        </>
+        <>Welcome back ${user}</>
       ) : (
-       <AuthSignupLogin isLogin={isLogin} setIsLogin={setIsLogin} />
+        <AuthSignupLogin
+          login={login}
+          signup={signup}
+          isLogin={isLogin}
+          setIsLogin={setIsLogin}
+          signupError={signupError}
+          error={error}
+        />
       )}
     </>
   )

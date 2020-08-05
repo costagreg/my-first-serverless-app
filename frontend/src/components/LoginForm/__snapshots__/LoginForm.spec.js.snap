@@ -12,11 +12,13 @@ exports[`LoginForm @renders renders <LoginForm /> without any error 1`] = `
         class="loginForm__email"
         placeholder="Email"
         type="email"
+        value=""
       />
       <input
         class="loginForm__password"
         placeholder="Password"
         type="password"
+        value=""
       />
       <div
         class="loginForm__buttons"

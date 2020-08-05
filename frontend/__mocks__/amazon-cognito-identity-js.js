@@ -1,5 +1,7 @@
 export const CognitoUserPool = jest.fn(function () {
-  this.getCurrentUser = jest.fn().mockReturnValue('cognitouserpool')
+  this.getCurrentUser = jest.fn().mockReturnValue({
+    getSession: () => {}
+  })
   this.signUp = jest.fn((email, password, attributes, _, callback) => {
     callback(undefined, {
       user: {

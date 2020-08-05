@@ -3,7 +3,7 @@ import {
   CognitoUserAttribute,
 } from 'amazon-cognito-identity-js'
 
-export const signupError = (error) => (dispatch, getState) => {
+export const signupError = (error) => (dispatch) => {
   dispatch({
     type: 'SET_SIGNUP_ERROR',
     error,

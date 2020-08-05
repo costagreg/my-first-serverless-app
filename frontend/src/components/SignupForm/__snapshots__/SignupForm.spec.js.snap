@@ -34,6 +34,7 @@ exports[`SignupForm @renders renders <SignupForm /> without any error 1`] = `
       >
         <button
           class="signupForm__submit"
+          type="submit"
         >
           Sign up
         </button>

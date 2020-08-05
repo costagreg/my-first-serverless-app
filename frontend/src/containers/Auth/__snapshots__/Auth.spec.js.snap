@@ -6,7 +6,7 @@ exports[`Auth @renders renders the <Auth/> without any error 1`] = `
     class="authButtons"
   >
     <button
-      class="authButtons__login"
+      class="authButtons__login authButtons__login--active"
     >
       Login
     </button>
@@ -26,11 +26,13 @@ exports[`Auth @renders renders the <Auth/> without any error 1`] = `
         class="loginForm__email"
         placeholder="Email"
         type="email"
+        value=""
       />
       <input
         class="loginForm__password"
         placeholder="Password"
         type="password"
+        value=""
       />
       <div
         class="loginForm__buttons"

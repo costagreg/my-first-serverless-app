@@ -74,7 +74,7 @@ export const getCurrentUser = () => (dispatch, getState) => {
 
   const cognitoUser = userPool.getCurrentUser()
 
-  if (cognitoUser != null) {
+  if (cognitoUser !== null) {
     cognitoUser.getSession(function (err, session) {
       if (err) {
         alert(err.message || JSON.stringify(err))

@@ -11,7 +11,7 @@ exports[`AuthButtons @renders renders <AuthButtons /> without any error 1`] = `
       Login
     </button>
     <button
-      class="authButtons__signup"
+      class="authButtons__signup authButtons__signup--active"
     >
       Signup
     </button>
