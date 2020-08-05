@@ -46,7 +46,7 @@ export const Auth = ({
   return (
     <>
       {user ? (
-        <>Welcome back ${user}</>
+        <>Welcome back {user}</>
       ) : (
         <AuthSignupLogin
           login={login}

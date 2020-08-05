@@ -41,29 +41,29 @@ describe('Auth', () => {
       })
     })
 
-    // describe('password does match', () => {
-    //   it('calls cognito user api and show a message', () => {
-    //     const { getByRole, getByPlaceholderText, getByText } = render(<Auth />)
+    describe('password does match', () => {
+      it('calls cognito user api and show a message', () => {
+        const { getByRole, getByPlaceholderText, getByText } = render(<Auth />)
 
-    //     const signupButton = getByRole('button', { name: 'Signup' })
+        const signupButton = getByRole('button', { name: 'Signup' })
 
-    //     fireEvent.click(signupButton)
+        fireEvent.click(signupButton)
 
-    //     const emailInput = getByPlaceholderText('Email')
-    //     const passwordInput = getByPlaceholderText('Password')
-    //     const confirmPasswordInput = getByPlaceholderText('Confirm Password')
-    //     const submitButton = getByRole('button', { name: 'Sign up' })
+        const emailInput = getByPlaceholderText('Email')
+        const passwordInput = getByPlaceholderText('Password')
+        const confirmPasswordInput = getByPlaceholderText('Confirm Password')
+        const submitButton = getByRole('button', { name: 'Sign up' })
 
-    //     fireEvent.change(emailInput, { target: { value: 'test@gmail.com' } })
-    //     fireEvent.change(passwordInput, { target: { value: 'password123*' } })
-    //     fireEvent.change(confirmPasswordInput, {
-    //       target: { value: 'password123*' },
-    //     })
+        fireEvent.change(emailInput, { target: { value: 'test@gmail.com' } })
+        fireEvent.change(passwordInput, { target: { value: 'password123*' } })
+        fireEvent.change(confirmPasswordInput, {
+          target: { value: 'password123*' },
+        })
 
-    //     fireEvent.click(submitButton)
+        fireEvent.click(submitButton)
 
-    //     getByText("Password doesn't match")
-    //   })
-    // })
+        getByText('Welcome back cognitousername')
+      })
+    })
   })
 })

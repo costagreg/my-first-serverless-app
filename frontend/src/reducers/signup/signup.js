@@ -10,9 +10,6 @@ function signupReducer(state = initialState, action) {
         ...state,
         error: action.error,
       }
-
-    case 'SET_SIGNUP_SUCCESS':
-      return { ...state, user: action.user }
   }
 
   return state

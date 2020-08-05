@@ -11,7 +11,7 @@ function loginReducer(state = initialState, action) {
         error: action.error,
       }
 
-    case 'SET_USER':
+    case 'SET_LOGIN_USER':
       return { ...state, user: action.user }
   }
 

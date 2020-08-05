@@ -47,7 +47,7 @@ describe('signup', () => {
 
   describe('signup', () => {
     describe('cognit returns success', () => {
-      it('dispatchs SET_SIGNUP_SUCCESS', () => {
+      it('dispatchs SET_LOGIN_USER', () => {
         const store = mockStore({
           appConfig: {
             userPoolId: 'userPoolId',
@@ -76,7 +76,7 @@ describe('signup', () => {
         )
 
         expect(actions[0]).toEqual({
-          type: 'SET_SIGNUP_SUCCESS',
+          type: 'SET_LOGIN_USER',
           user: 'cognitousername',
         })
       })

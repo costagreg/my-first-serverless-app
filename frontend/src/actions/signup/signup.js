@@ -30,7 +30,7 @@ export const signup = (email, password) => (dispatch, getState) => {
       dispatch(signupError(error.message || JSON.stringify(error)))
     } else {
       dispatch({
-        type: 'SET_SIGNUP_SUCCESS',
+        type: 'SET_LOGIN_USER',
         user: result.user.getUsername(),
       })
     }

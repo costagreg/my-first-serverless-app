@@ -97,7 +97,7 @@ export const getCurrentUser = () => (dispatch, getState) => {
           alert(err.message || JSON.stringify(err))
           return
         }
-        dispatch({ type: 'SET_USER', user: Username })
+        dispatch({ type: 'SET_LOGIN_USER', user: Username })
       })
 
       AWS.config.credentials = new AWS.CognitoIdentityCredentials({
